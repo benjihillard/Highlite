@@ -1,0 +1,15 @@
+{
+  "name": "highlite",
+  "version": "1.0.0",
+  "description": "an easier way to read",
+  "main": "highlite.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "51002483+benjihillard@users.noreply.github.com"
+  },
+  "author": "benjamin hillard",
+  "license": "ISC"
+}
