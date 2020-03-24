@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="master.css">
-    <title></title>
-  </head>
-  <body>
-      <label for="myfile" >Select a file:</label>
-      <input type="file" id="files" name="files[]" multiple>
-      <output id="list"></output>
-
-  </body>
-  <script src="highlite.js" charset="utf-8"></script>
+<html>
+<head>
+    <title>Simple Upload Example</title>
+</head>
+<body>
+<form action="/" enctype="multipart/form-data" method="post">
+    <input type="file" name="upload" multiple>
+    <input type="submit" value="Upload">
+</form>
+</body>
 </html>
