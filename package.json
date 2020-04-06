@@ -11,5 +11,18 @@
     "url": "51002483+benjihillard@users.noreply.github.com"
   },
   "author": "benjamin hillard",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "express": "^4.17.1",
+    "formidable": "^1.2.2",
+    "jquery": "^3.4.1"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "read"
+  ]
 }
