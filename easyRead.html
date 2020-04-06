@@ -10,7 +10,7 @@
         text-align: center;
       }
 
-      .highlighting {
+      form p {
         margin: 2px;
       }
 
@@ -90,11 +90,22 @@
         <p class="highlighting">Highlighting</p>
         <hr>
         <input type="radio" id="sentence" name="highlight" value="sentence">
-        <label for="male">Sentence</label><br>
+        <label for="sentence">Sentence</label><br>
         <input type="radio" id="word" name="highlight" value="word">
-        <label for="female">Word</label><br>
+        <label for="word">Word</label><br>
         <input type="radio" id="paragraph" name="highlight" value="paragraph">
-        <label for="other">Paragraph</label>
+        <label for="paragraph">Paragraph</label>
+      </form>
+      <form action="/action_page.php">
+        <p class="coloring">Coloring</p>
+        <hr>
+        <input type="color" id="highlight" name="color" value="#fffc00">
+        <label for="highlight">Highlight</label><br>
+        <input type="color" id="text" name="color" value="#000000">
+        <label for="text">Text</label><br>
+        <input type="color" id="background" name="color" value="#ffffff">
+        <label for="background">Background</label><br>
+      </form>
     </div>
     
     <div id="main">
