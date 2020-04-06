@@ -9,7 +9,18 @@
       h1 {
         text-align: center;
       }
-      
+
+      .highlighting {
+        margin: 2px;
+      }
+
+      hr {
+        border: 1px solid white;
+        margin-top: 2px;
+        margin-bottom: 10px;
+        margin-right: 8px;
+      }
+
       .sidebar {
         height: 100%;
         width: 0;
@@ -17,23 +28,27 @@
         z-index: 1;
         top: 0;
         left: 0;
-        background-color: #111;
+        background-color: darkgray;
         overflow-x: hidden;
         transition: 0.5s;
         padding-top: 60px;
       }
       
-      .sidebar a {
-        padding: 8px 8px 8px 32px;
+      .sidebar a, form {
+        padding: 8px 8px 8px 16px;
         text-decoration: none;
-        font-size: 25px;
-        color: #818181;
+        font-size: 20px;
+        color: white;
         display: block;
         transition: 0.3s;
       }
+
+      .sidebar label {
+        font-size: 17px;
+      }
       
-      .sidebar a:hover {
-        color: #f1f1f1;
+      .sidebar form label:hover {
+        color: lightgray;
       }
       
       .sidebar .closebtn {
@@ -47,16 +62,16 @@
       .openbtn {
         font-size: 20px;
         cursor: pointer;
-        background-color: #111;
+        background-color: darkgray;
         color: white;
         padding: 10px 15px;
         border: none;
       }
       
       .openbtn:hover {
-        background-color: #444;
+        background-color: lightgray;
       }
-      
+
       #main {
         transition: margin-left .5s;
         padding: 16px;
@@ -71,6 +86,15 @@
   <body>
     <div id="mySidebar" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <form action="/action_page.php">
+        <p class="highlighting">Highlighting</p>
+        <hr>
+        <input type="radio" id="sentence" name="highlight" value="sentence">
+        <label for="male">Sentence</label><br>
+        <input type="radio" id="word" name="highlight" value="word">
+        <label for="female">Word</label><br>
+        <input type="radio" id="paragraph" name="highlight" value="paragraph">
+        <label for="other">Paragraph</label>
     </div>
     
     <div id="main">
