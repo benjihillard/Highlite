@@ -46,14 +46,14 @@ The database holds user objects. Which are JSON object holding all the variables
 # User interface:
 * wireframes:
 
-![example image](images/wireframe_upload.png)
-![example image](images/wireframe_read.png)
+![example image](wireframe_upload.png)
+![example image](wireframe_read.png)
 
 The above are the first-pass wireframes/design mockups we used to inform our CSS/HTML mockups. Our website has two main pages the user interacts with, so we wireframed both.
 
 * html/css mockups:
 
-![example image](images/upload_screenshot.png)
-![example image](images/read_screenshot.png)
+![example image](upload_screenshot.png)
+![example image](read_screenshot.png)
 
 The above are our current working mockups of the read and upload pages. Each page features minimalist, distraction free design, with minimizable sidebar menus. The upload page features a working upload field, and the read page has a sidebar for formatting options along with a large space for the uploaded text to be pasted where these formatting options will be applied.
