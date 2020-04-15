@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title></title>
-    <script src="options.js"></script>
+    <script src="settings.js"></script>
     <style>
       h1 {
         text-align: center;
@@ -110,17 +110,17 @@
       <form action="/action_page.php">
         <p class="Line Spacing">Line Spacing</p>
         <hr>
-        <input type="range" id="spacing" name="spacing" min="0" max="10">
+        <input type="range" id="spacing" name="spacing" min="0" max="10" value="5">
       </form>
       <form action="/action_page.php">
         <p class="Kerning">Kerning</p>
         <hr>
-        <input type="range" id="kerning" name="kerning" min="0" max="10">
+        <input type="range" id="kerning" name="kerning" min="0" max="10" value="5">
       </form>
       <form action="/action_page.php">
         <p class="FontSize">Font size</p>
         <hr>
-        <input type="range" id="fontsize" name="fontsize" min="0" max="10">
+        <input type="range" id="fontsize" name="fontsize" min="0" max="10" value="5">
       </form>
       <form>
         <button type="button" id="button" class="btn btn-secondary btn-sm" onclick="storeSettings()">Update</button>
@@ -131,17 +131,6 @@
       <button class="openbtn" onclick="openNav()">☰ Sidebar</button>
     </div>
 
-    <script>
-    function openNav() {
-      document.getElementById("mySidebar").style.width = "250px";
-      document.getElementById("main").style.marginLeft = "250px";
-    }
-
-    function closeNav() {
-      document.getElementById("mySidebar").style.width = "0";
-      document.getElementById("main").style.marginLeft= "0";
-    }
-    </script>
     <h1 class="title">Hello there!</h1>
     <input type="checkbox" name value="true">
     <p class="bodytext">
