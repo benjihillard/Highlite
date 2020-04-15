@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title></title>
+    <script src="options.js"></script>
     <style>
       h1 {
         text-align: center;
@@ -120,6 +121,9 @@
         <p class="FontSize">Font size</p>
         <hr>
         <input type="range" id="fontsize" name="fontsize" min="0" max="10">
+      </form>
+      <form>
+        <button type="button" id="button" class="btn btn-secondary btn-sm" onclick="storeSettings()">Update</button>
       </form>
     </div>
 
