@@ -132,13 +132,18 @@ p{
   appearance: none;
   width: 25px;
   height: 25px;
-  background: #4CAF50;
+  background: #111111;
   cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
   width: 25px;
   height: 30px;
-  background: #4CAF50;
+  background: #111111;
   cursor: pointer;
+}
+
+.max{
+  max-height: 100vh;
+  min-width: 100vw;
 }

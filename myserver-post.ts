@@ -30,9 +30,9 @@ export class MyServer {
 
 
        this.router.post('/filedrop', function(req, res){
-         console.log('llll');
+         console.log(req);
 
-         return res.redirect('/read');
+         return res.redirect('./read');
        });
        this.router.post('/login', function(req, res){
 
