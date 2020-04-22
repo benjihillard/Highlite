@@ -1,0 +1,144 @@
+.row{
+  background-color: #F2F7F2;
+}
+
+html{
+  background-color: #F2F7F2;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+p{
+  font-family: 'Faustina', serif;
+}
+
+#arrow{
+  margin-top: 40vh;
+  min-width: 50px;
+  min-height: 50px;
+}
+
+#upload{
+  margin-left: 2.5vw;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -20rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .input-group {
+  width: 20rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+#sidebar-wrapper .h1 {
+  width: 16rem;
+  margin: 2rem;
+  margin-bottom: 5rem;
+  text-align: center;
+  font-weight: bold;
+  color: #251605;
+}
+
+#sidebar-wrapper .h2 {
+  width: 16rem;
+  margin: 2rem;
+  margin-bottom: 5rem;
+  text-align: center;
+  color: #5BC0EB;
+
+}
+
+#sidebar-wrapper .h3 {
+  width: 16rem;
+  margin: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #251605;
+}
+
+
+
+#sidebar-wrapper .h4 {
+  width: 16rem;
+  margin: 2rem;
+  margin-top: 14rem;
+  text-align: center;
+  font-size: 1.8rem;
+  color: #5BC0EB;
+}
+
+
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -20rem;
+  }
+}
+
+
+
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 80%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 30px;
+  background: #4CAF50;
+  cursor: pointer;
+}

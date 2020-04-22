@@ -1,28 +1,20 @@
 {
-  "name": "highlite",
+  "name": "get",
   "version": "1.0.0",
-  "description": "an easier way to read",
-  "main": "highlite.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "51002483+benjihillard@users.noreply.github.com"
-  },
-  "author": "benjamin hillard",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.4.1",
     "express": "^4.17.1",
-    "formidable": "^1.2.2",
-    "jquery": "^3.4.1"
+    "mongodb": "^3.5.6",
+    "typescript": "^3.8.3"
   },
-  "directories": {
-    "doc": "docs"
-  },
-  "devDependencies": {},
-  "keywords": [
-    "read"
-  ]
+  "devDependencies": {
+    "@types/node": "^13.13.1"
+  }
 }

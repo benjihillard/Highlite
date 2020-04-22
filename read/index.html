@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Highlite</title>
+    <!--css-->
+    <link rel="stylesheet" href="./read.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--bootstrap/jquery-->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!--fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Faustina:ital,wght@0,400;0,500;0,562;0,600;0,700;1,400;1,500;1,562;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;523;600;700;800&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <!-- whole page -->
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar -->
+      <div class="bg-light border-right" id="sidebar-wrapper">
+        <p class="h1">Highlite</p>
+
+        <div class="text-center">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked>   Word
+            </label>
+            <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option2" autocomplete="off"> Sentance
+            </label>
+            <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option3" autocomplete="off"> Paragraph
+            </label>
+          </div>
+        </div>
+        <p class="h3">Colors</p>
+        <div class="text-center">
+          <div class="btn-group center " data-toggle="buttons">
+            <label class="btn btn-secondary active">
+              <input type="color" id="highlight" name="color" value="#fffc00">
+            </label>
+            <label class="btn btn-secondary">
+              <input type="color" id="text" name="color" value="#000000">
+            </label>
+            <label class="btn btn-secondary">
+              <input type="color" id="background" name="color" value="#ffffff">
+            </label>
+          </div>
+        </div>
+
+        <p class="h3">Font Size</p>
+        <div class="text-center">
+          <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          </div>
+        </div>
+        <p class="h3">Kerning</p>
+        <div class="text-center">
+          <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="Range">
+          </div>
+        </div>
+        <p class="h3">Line Spacing</p>
+        <div class="text-center">
+          <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="Range">
+          </div>
+        </div>
+        <div class="text-center" style="margin-top: 3rem;">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Fonts
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <button class="dropdown-item" type="button">Font 1</button>
+              <button class="dropdown-item" type="button">Font 2</button>
+              <button class="dropdown-item" type="button">Font 3</button>
+              </div>
+          </div>
+        </div>
+        <div class="text-center" style="margin-top: 10rem;">
+          <button type="button" class="btn btn-secondary" >Reset</button>
+          <button type="button" class="btn btn-outline-secondary" >save</button>
+        </div>
+      </div>
+      <!-- Sidebar -->
+        <!-- main page -->
+        <div class="row">
+          <div class="col-md-12">
+            <a  id="menu-toggle" ><img id="arrow" src="images/arrowback.png" class="img-fluid" alt="toggle menu"></a>
+          </div>
+        </div>
+        <div class="row">
+          <div  class="col-md-12">
+            <p>blah</p>
+          </div>
+
+        </div>
+        <!-- main page -->
+      </div>
+      <!-- whole page -->
+    <script src="./read.js"></script>
+  </body>
+</html>
