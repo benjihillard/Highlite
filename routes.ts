@@ -59,7 +59,13 @@ export class MyServer {
            res.send(400);
          }
        });
-             
+
+       // save settings
+       this.router.post("/read/settingSave", function(req, res) {
+         console.log(req.body);
+         res.send(200);
+       });
+
        //everything else
 	     this.router.post('*', async (request, response) => {
 	        response.send(JSON.stringify({ "result" : "command-not-found" }));
