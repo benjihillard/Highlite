@@ -21,17 +21,19 @@
       <!-- Sidebar -->
       <div class="bg-light border-right" id="sidebar-wrapper">
           <p class="h1">Highlite</p>
-          <a href="#"><p class="h2">Saved Documents</p></a>
-          <p class="h3">Login / Sign Up</p>
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="@Email Here" onclick="login()">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Login</button>
+          <a href="/read"><p class="h2">Sample Document</p></a>
+          <div class="text-center" id="login">
+            <p class="h3">Login / Sign Up</p>
+            <input id="userName" type="email" class="form-control"  placeholder="Enter email">
+            <small  id="warning" class="form-text text-muted"></small>
+            <button onclick="login()" type="button" class="btn btn-secondary">login</button>
+            <button onclick="signUp()" type="button" class="btn btn-outline-secondary">Sign Up</button>
+          </div>
+          <div id="welcome">
+            <p id="greeting" class="h3">Welcome Back</p>
+            <p id="displayName" class="h3">userName</p>
           </div>
           <p  class="h4">Drag and drop Documents into the square</p>
-          
-
-        </div>
       </div>
       <!-- Sidebar -->
         <!-- main page -->
@@ -45,7 +47,7 @@
             <a id="menu-toggle"><img src="images/logo.png" class="img-fluid" alt="Responsive image"></a>
           </div>
           <div class="col-md-6 offset-md-2">
-            <div ondrop="dropHandler(event);" ondragleave="dragLeaveHandler(event);" ondragover="dragOverHandler(event);">
+            <div  id="drop-area" ondragleave="dragLeaveHandler(event);" ondragover="dragOverHandler(event);">
               <img id="upload" src="images/upload.png" class="img-fluid" alt="Responsive image">
             </div>
           </div>
