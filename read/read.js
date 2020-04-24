@@ -39,4 +39,19 @@ function storeSettings() {
   let fontsize = document.getElementById("fontsize").value;
   let spacing = document.getElementById("spacing").value;
   let kerning = document.getElementById("kerning").value;
+  let url = "http://localhost:8888/read/settingSave";
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhr.addEventListener("readystatechange", function(e) {
+    if (xhr.status == 200) {
+      console.log("success");
+    }
+  });
+  let settings = {
+    "color": "red",
+    "size": 24
+  };
+  xhr.send(JSON.stringify(settings));
 }
