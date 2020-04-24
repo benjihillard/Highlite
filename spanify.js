@@ -47,6 +47,7 @@ var spanify = /** @class */ (function () {
                 this.spanedText.paragraphString = parser.render(text);
             });
         });
+        console.log(this.spanedText.wordString);
         return this.spanedText;
     };
     return spanify;

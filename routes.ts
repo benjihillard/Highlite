@@ -16,6 +16,7 @@ export class MyServer {
     private port = 8080;
     private router = express.Router();
 
+
     constructor(db) {
 	     this.theDatabase = db;
 	     this.router.use((request, response, next) => {
@@ -30,16 +31,7 @@ export class MyServer {
        this.server.use(bodyParser.json());
        this.server.use('/', this.router);
 
-       /*
-	     this.server.use('/', express.static('./login'));
-       this.server.use('/', express.static('./read'));
-       this.server.use(express.json());
-       this.server.use('/', this.router);
-       //read page
-       this.router.get('/read',function(req,res){
-         res.render(path.join(__dirname +'/read/index.html'));
-       });*/
-       //uplad a file
+
        this.router.post('/filedrop',async function(req, res){
          var form = new formidable.IncomingForm();
          form.parse(req);
@@ -67,6 +59,7 @@ export class MyServer {
            res.send(400);
          }
        });
+             
        //everything else
 	     this.router.post('*', async (request, response) => {
 	        response.send(JSON.stringify({ "result" : "command-not-found" }));

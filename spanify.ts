@@ -53,6 +53,8 @@ export class spanify {
         this.spanedText.paragraphString = parser.render(text);
       });
     });
+    console.log(this.spanedText.wordString);
+
     return this.spanedText;
   }
 }

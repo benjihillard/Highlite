@@ -63,16 +63,6 @@ var MyServer = /** @class */ (function () {
         this.server.use(bodyParser.urlencoded({ extended: false }));
         this.server.use(bodyParser.json());
         this.server.use('/', this.router);
-        /*
-          this.server.use('/', express.static('./login'));
-        this.server.use('/', express.static('./read'));
-        this.server.use(express.json());
-        this.server.use('/', this.router);
-        //read page
-        this.router.get('/read',function(req,res){
-          res.render(path.join(__dirname +'/read/index.html'));
-        });*/
-        //uplad a file
         this.router.post('/filedrop', function (req, res) {
             return __awaiter(this, void 0, void 0, function () {
                 var form;
@@ -110,6 +100,12 @@ var MyServer = /** @class */ (function () {
                     return [2 /*return*/];
                 });
             });
+        });
+        // get settings
+        this.router.post('/read/settingssave', function (req, res) {
+            console.log('you made it');
+            console.log(req.body);
+            res.send(200);
         });
         //everything else
         this.router.post('*', function (request, response) { return __awaiter(_this, void 0, void 0, function () {

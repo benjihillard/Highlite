@@ -69,7 +69,7 @@ function uploadFile(file) {
   let formData = new FormData();
   xhr.open('POST', url, true);
   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-  xhr.addEventListener('readystatechange', await function(e) {
+  xhr.addEventListener('readystatechange', function(e) {
     if (xhr.readyState == 4 && xhr.status == 200) {
       console.log('you made it');
       window.location.href = "http://localhost:8080/read";
