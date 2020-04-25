@@ -101,11 +101,25 @@ var MyServer = /** @class */ (function () {
                 });
             });
         });
-        // get settings
-        this.router.post('/read/settingssave', function (req, res) {
-            console.log('you made it');
+        // save settings
+        this.router.post("/read/settingSave", function (req, res) {
             console.log(req.body);
             res.send(200);
+        });
+        // get settings
+        this.router.post("/read/settingGet", function (req, res) {
+            var settings = {
+                //TO BE swapped out with database info once we have settings tied to accounts
+                highlight: 'word',
+                hcolor: 'yellow',
+                tcolor: 'black',
+                bcolor: 'white',
+                fontsize: '18',
+                letterspace: '0',
+                wordspace: '0',
+                lineheight: '24'
+            };
+            res.send(JSON.stringify(settings));
         });
         //everything else
         this.router.post('*', function (request, response) { return __awaiter(_this, void 0, void 0, function () {
