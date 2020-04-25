@@ -66,6 +66,22 @@ export class MyServer {
          res.send(JSON.stringify());
        });
 
+       // get settings
+       this.router.post("/read/settingGet", function(req, res) {
+        let settings = {
+          //TO BE swapped out with database info once we have settings tied to accounts
+          highlight: 'word',
+          hcolor: 'yellow',
+          tcolor: 'black',
+          bcolor: 'white',
+          fontsize: '18',
+          letterspace: '0',
+          wordspace: '0',
+          lineheight: '24',
+        };
+        res.send(JSON.stringify(settings));
+       });
+
        //everything else
 	     this.router.post('*', async (request, response) => {
 	        response.send(JSON.stringify({ "result" : "command-not-found" }));
