@@ -26,6 +26,11 @@ This screenshot shows the settings being updated and sent to the database. This 
 
 This screenshot shows the settings being reset and the default settings have been received from the server. This can be seen in the console as the settings that have been received are the default settings.
 
+# Heroku Link:
+* Login page: https://highlite-test.herokuapp.com
+* Read page: https://highlite-test.herokuapp.com/read/index.html
+Benji is currently figuring out how to redirect the user to the read page once a file upload is detected. For now, there's no clean way to transition between pages.
+
 # Contributions
 Benji Hillard:
 * Login API
@@ -40,3 +45,10 @@ Corey Sarkis:
 * Updated read page JavaScript: storeSettings functionality
 * Updated read page JavaScript: Alter displayed text based on settings
 * Implemented settingsSave API: Send saved settings to server
+
+Alden Burgess:
+* Updated read page Javascript: cycling span highlighting functionality
+* Updated read page Javascript: place spans around words or sentences depending on user preferences
+* Improved JS/HTML integration
+* Implemented settingsGet API for retrieving JSON from the server
+* Heroku integration and deployment
