@@ -4,7 +4,7 @@ let highlightColor = document.getElementById('highlight').value;
 
 //span cycling
 let currentSpan=0;
-document.addEventListener('keyup', function (e) { 
+document.addEventListener('keyup', function (e) {
   console.log(highlightColor);
   if(e.defaultPrevented){
     return;
@@ -24,7 +24,7 @@ document.addEventListener('keyup', function (e) {
   }
   if(document.getElementById("option1").checked){
     console.log('option1 selected');
-    
+
     for(let i=0; i<array.length; ++i){
       array[i].style.backgroundColor="transparent";
     }
@@ -67,14 +67,29 @@ $("#menu-toggle").click(function(e) {
 });
 
 function getSettings() {
-  let url = "http://localhost:8888/read/settingGet";
+  let url = "http://localhost:8080/read/settingGet";
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
   xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhr.addEventListener("readystatechange", function(e) {
     if (xhr.status == 200) {
-      console.log(xhr.ressponse);
+      console.log(xhr.response);
+      //receive json from server
+    }
+  });
+  xhr.send();
+}
+
+function reset() {
+  let url = "http://localhost:8080/read/settingStock";
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhr.addEventListener("readystatechange", function(e) {
+    if (xhr.status == 200) {
+      console.log(xhr.response);
       //receive json from server
     }
   });

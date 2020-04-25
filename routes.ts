@@ -63,21 +63,36 @@ export class MyServer {
        // save settings
        this.router.post("/read/settingSave", function(req, res) {
          console.log(req.body);
-         res.send(JSON.stringify());
+         res.send(200);
        });
 
        // get settings
        this.router.post("/read/settingGet", function(req, res) {
         let settings = {
           //TO BE swapped out with database info once we have settings tied to accounts
-          highlight: 'word',
-          hcolor: 'yellow',
-          tcolor: 'black',
-          bcolor: 'white',
-          fontsize: '18',
-          letterspace: '0',
-          wordspace: '0',
-          lineheight: '24',
+          'highlight': 'word',
+          'hcolor': 'yellow',
+          'tcolor': 'black',
+          'bcolor': 'white',
+          'fontsize': '18',
+          'letterspace': '0',
+          'wordspace': '0',
+          'lineheight': '24',
+        };
+        res.send(JSON.stringify(settings));
+       });
+
+       this.router.post("/read/settingStock", function(req, res) {
+        let settings = {
+          //TO BE swapped out with database info once we have settings tied to accounts
+          'highlight': 'word',
+          'hcolor': 'yellow',
+          'tcolor': 'black',
+          'bcolor': 'white',
+          'fontsize': '18',
+          'letterspace': '0',
+          'wordspace': '0',
+          'lineheight': '24',
         };
         res.send(JSON.stringify(settings));
        });
