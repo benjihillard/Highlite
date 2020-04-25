@@ -37,8 +37,9 @@ function storeSettings() {
   let tcolor = document.getElementById("text").value;
   let bcolor = document.getElementById("background").value;
   let fontsize = document.getElementById("fontsize").value;
-  let spacing = document.getElementById("spacing").value;
-  let kerning = document.getElementById("kerning").value;
+  let letterspace = document.getElementById("letterspace").value;
+  let wordspace = document.getElementById("wordspace").value;
+  let lineheight = document.getElementById("lineheight").value;
   let url = "http://localhost:8888/read/settingSave";
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
@@ -50,8 +51,19 @@ function storeSettings() {
     }
   });
   let settings = {
-    "color": "red",
-    "size": 24
+    highlight,
+    hcolor,
+    tcolor,
+    bcolor,
+    fontsize,
+    letterspace,
+    wordspace,
+    lineheight,
   };
   xhr.send(JSON.stringify(settings));
+  let text = document.getElementById("bodytext");
+  text.style.fontSize = fontsize + "px";
+  text.style.letterSpacing = letterspace + "px";
+  text.style.wordSpacing = wordspace + "px";
+  text.style.lineHeight = lineheight + "px";
 }

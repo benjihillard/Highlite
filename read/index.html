@@ -25,7 +25,7 @@
         <div class="text-center">
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary active">
-            <input type="radio" name="highlight" id="option1" value="word" autocomplete="off" checked>   Word
+            <input type="radio" name="highlight" id="option1" value="word" autocomplete="off" checked> Word
             </label>
             <label class="btn btn-secondary">
             <input type="radio" name="highlight" id="option2" value="sentence" autocomplete="off"> Sentance
@@ -49,23 +49,28 @@
             </label>
           </div>
         </div>
-
         <p class="h3">Font Size</p>
         <div class="text-center">
           <div class="slidecontainer">
-            <input type="range" min="1" max="100" value="50" class="slider" id="fontsize">
+            <input type="range" min="8" max="24" value="16" class="slider" id="fontsize">
           </div>
         </div>
-        <p class="h3">Kerning</p>
+        <p class="h3">Letter Spacing</p>
         <div class="text-center">
           <div class="slidecontainer">
-            <input type="range" min="1" max="100" value="50" class="slider" id="kerning">
+            <input type="range" min="-1" max="1" value="0" class="slider" id="letterspace">
+          </div>
+        </div>
+        <p class="h3">Word Spacing</p>
+        <div class="text-center">
+          <div class="slidecontainer">
+            <input type="range" min="0" max="10" value="0" class="slider" id="wordspace">
           </div>
         </div>
         <p class="h3">Line Spacing</p>
         <div class="text-center">
           <div class="slidecontainer">
-            <input type="range" min="1" max="100" value="50" class="slider" id="spacing">
+            <input type="range" min="24" max="48" value="24" class="slider" id="lineheight">
           </div>
         </div>
         <div class="text-center" style="margin-top: 3rem;">
