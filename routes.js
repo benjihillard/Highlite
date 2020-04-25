@@ -101,11 +101,10 @@ var MyServer = /** @class */ (function () {
                 });
             });
         });
-        // get settings
-        this.router.post('/read/settingssave', function (req, res) {
-            console.log('you made it');
+        // save settings
+        this.router.post("/read/settingSave", function (req, res) {
             console.log(req.body);
-            res.send(200);
+            res.send(JSON.stringify());
         });
         //everything else
         this.router.post('*', function (request, response) { return __awaiter(_this, void 0, void 0, function () {

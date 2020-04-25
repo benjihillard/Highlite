@@ -40,14 +40,14 @@ function storeSettings() {
   let letterspace = document.getElementById("letterspace").value;
   let wordspace = document.getElementById("wordspace").value;
   let lineheight = document.getElementById("lineheight").value;
-  let url = "http://localhost:8888/read/settingSave";
+  let url = "http://localhost:8080/read/settingSave";
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
   xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhr.addEventListener("readystatechange", function(e) {
     if (xhr.status == 200) {
-      console.log("success");
+      console.log('success');
     }
   });
   let settings = {

@@ -63,7 +63,7 @@ export class MyServer {
        // save settings
        this.router.post("/read/settingSave", function(req, res) {
          console.log(req.body);
-         res.send(200);
+         res.send(JSON.stringify());
        });
 
        //everything else
