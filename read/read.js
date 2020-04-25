@@ -1,10 +1,11 @@
 let backgroundColor;
 let fontColor;
-let highlightColor;
+let highlightColor = document.getElementById('highlight').value;
 
 //span cycling
 let currentSpan=0;
 document.addEventListener('keyup', function (e) { 
+  console.log(highlightColor);
   if(e.defaultPrevented){
     return;
   }
