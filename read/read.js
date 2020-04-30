@@ -1,11 +1,11 @@
-let backgroundColor;
+let backgroundColor = document.getElementsBy;
 let fontColor;
-let highlightColor = document.getElementById('highlight').value;
+let highlightColor = document.getElementById('highlight');
 
 //span cycling-----------------------------------------------------------------------------
 let currentSpan=0;
 document.addEventListener('keyup', function (e) {
-  console.log(highlightColor);
+  console.log(highlightColor.value);
   if(e.defaultPrevented){
     return;
   }
@@ -28,14 +28,14 @@ document.addEventListener('keyup', function (e) {
     for(let i=0; i<array.length; ++i){
       array[i].style.backgroundColor="transparent";
     }
-    document.getElementsByClassName('word'+(currentSpan+480))[0].style.backgroundColor=highlightColor;
+    document.getElementsByClassName('word'+(currentSpan+480))[0].style.backgroundColor=highlightColor.value;
   }
   if(document.getElementById('option2').checked){
     console.log('option2 selected');
     for(let i=0; i<array.length; ++i){
       array[i].style.backgroundColor="transparent";
     }
-    document.getElementsByClassName('sentance'+currentSpan)[0].style.backgroundColor=highlightColor;
+    document.getElementsByClassName('sentance'+currentSpan)[0].style.backgroundColor=highlightColor.value;
   }
 });
 
@@ -57,7 +57,7 @@ $("#option3").click(function(e) {
 
 //------------------------------------------------------------------------------------------------------
 
-//sidebar toggle
+//sidebar toggle----------------------------------------------------------------------------------------
 $("#menu-toggle").click(function(e) {
   e.preventDefault();
   $("#wrapper").toggleClass("toggled");
@@ -67,6 +67,8 @@ $("#menu-toggle").click(function(e) {
     $("#arrow").attr('src','images/arrow.png');
   }
 });
+
+//-----------------------------------------------------------------------------------------------------
 
 function getSettings() {
   let url = "http://localhost:8080/read/settingGet";
