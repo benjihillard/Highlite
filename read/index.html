@@ -13,6 +13,7 @@
     <!--fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Faustina:ital,wght@0,400;0,500;0,562;0,600;0,700;1,400;1,500;1,562;1,600;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;523;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   </head>
 
   <body>
@@ -41,10 +42,10 @@
             <label class="btn btn-secondary active">
               <input type="color" id="highlight" name="color" value="#fffc00">
             </label>
-            <label class="btn btn-secondary">
+            <label  onchange="changeFontColor()" class="btn btn-secondary">
               <input type="color" id="text" name="color" value="#000000">
             </label>
-            <label class="btn btn-secondary">
+            <label onchange="changeBackgroundColor()" class="btn btn-secondary">
               <input type="color" id="background" name="color" value="#ffffff">
             </label>
           </div>
@@ -52,25 +53,25 @@
         <p class="h3">Font Size</p>
         <div class="text-center">
           <div class="slidecontainer">
-            <input type="range" min="8" max="24" value="16" class="slider" id="fontsize">
+            <input onchange="changeFontSize()" type="range" min="8" max="36" value="16" class="slider" id="fontsize">
           </div>
         </div>
         <p class="h3">Letter Spacing</p>
         <div class="text-center">
           <div class="slidecontainer">
-            <input type="range" min="-1" max="1" value="0" class="slider" id="letterspace">
+            <input onchange="changeLetterSpacing()" type="range" min="-1" max="5" value="0" class="slider" id="letterspace">
           </div>
         </div>
         <p class="h3">Word Spacing</p>
         <div class="text-center">
           <div class="slidecontainer">
-            <input type="range" min="0" max="10" value="0" class="slider" id="wordspace">
+            <input onchange="changeWordSpacing()" type="range" min="0" max="10" value="0" class="slider" id="wordspace">
           </div>
         </div>
         <p class="h3">Line Spacing</p>
         <div class="text-center">
           <div class="slidecontainer">
-            <input type="range" min="24" max="48" value="24" class="slider" id="lineheight">
+            <input onchange="changeLineSpacing()" type="range" min="24" max="48" value="24" class="slider" id="lineheight">
           </div>
         </div>
         <div class="text-center" style="margin-top: 3rem;">
@@ -79,25 +80,25 @@
               Fonts
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button class="dropdown-item" type="button">Font 1</button>
-              <button class="dropdown-item" type="button">Font 2</button>
-              <button class="dropdown-item" type="button">Font 3</button>
+              <button class="dropdown-item" onClick="fontOne()" type="button">Faustina</button>
+              <button class="dropdown-item" onClick="fontTwo()" type="button">Dosis</button>
+              <button class="dropdown-item" onClick="fontThree()" type="button">Roboto</button>
               </div>
           </div>
         </div>
-        <div class="text-center" style="margin-top: 10rem;">
+        <div class="text-center" style="margin-top: 3rem;">
           <button type="button" class="btn btn-secondary" onClick="reset()" >Reset</button>
           <button type="button" class="btn btn-outline-secondary" onclick="storeSettings()">save</button>
         </div>
       </div>
       <!-- Sidebar -->
         <!-- main page -->
-        <div class="row">
+        <div class="row" id="pageBtn">
           <div class="col-md-12">
             <a  id="menu-toggle" ><img id="arrow" src="images/arrowback.png" class="img-fluid" alt="toggle menu"></a>
           </div>
         </div>
-        <div class="row">
+        <div class="row" id="page">
           <div class="col-md-12 overflow-auto max">
             <p class="bodytext" id="bodytext">
 

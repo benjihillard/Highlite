@@ -1,6 +1,96 @@
-let backgroundColor = document.getElementsBy;
-let fontColor;
+// getting settings
+let settings = getSettings()
+// declairng buttons
+let backgroundColor = document.getElementById('background');
+let fontColor = document.getElementById('text');
 let highlightColor = document.getElementById('highlight');
+let fontsize = document.getElementById("fontsize");
+let letterspace = document.getElementById("letterspace");
+let wordspace = document.getElementById("wordspace");
+let lineheight = document.getElementById("lineheight");
+
+// declaring  page elements
+let text = document.getElementById("bodytext");
+let page = document.getElementById("page");
+let pageBtn = document.getElementById("pageBtn");
+
+
+// font selectors
+function fontOne(){
+  text.style.fontFamily = "'Faustina', serif";
+}
+
+function fontTwo(){
+  text.style.fontFamily = "'Dosis', sans-serif";
+}
+
+function fontThree(){
+  text.style.fontFamily = "'Roboto Slab', serif";
+}
+
+// color selectors
+function changeBackgroundColor(){
+  page.style.backgroundColor = backgroundColor.value;
+  pageBtn.style.backgroundColor = backgroundColor.value;
+}
+
+function changeFontColor(){
+  text.style.color = fontColor.value;
+}
+
+// text formating
+
+function changeFontSize(){
+  text.style.fontSize = (fontsize.value + "px");
+}
+
+function changeLetterSpacing(){
+  text.style.letterSpacing = (letterspace.value + "px");
+}
+
+function changeWordSpacing(){
+  text.style.wordSpacing = (wordspace.value + "px");
+}
+
+function changeLineSpacing(){
+  text.style.lineHeight = (lineheight.value + "px");
+}
+
+// return user settings as a JSON object-----------------------------------------------------
+function gatherSettings(){
+  return {
+    'fontFamily': text.style.fontFamily,
+    'highlightColor' : highlightColor.value,
+    'backgroundColor' : backgroundColor.value,
+    'fontColor' : fontColor.value,
+    'fontSize' : fontsize.value,
+    'letterSpacing' : letterspace.value,
+    'wordSpacing' : wordspace.value,
+    'lineHeight' : lineheight.value
+  }
+}
+//----------------------------------------------------------------------------------------
+
+// apply some JSON settings----------------------------------------------------------
+function set(setting) {
+    text.style.fontFamily = setting.fontFamily;
+    console.log(setting.fontFamily);
+    highlightColor.value = setting.highlightColor;
+    backgroundColor.value = setting.backgroundColor;
+    fontColor.value = setting.fontColor;
+    fontsize.value = setting.fontSize;
+    letterspace.value = setting.letterSpacing;
+    wordspace.value = setting.wordSpacing;
+    lineheight.value = setting.lineHeight;
+    changeBackgroundColor();
+    changeFontColor();
+    changeFontSize();
+    changeLetterSpacing();
+    changeWordSpacing();
+    changeLineSpacing();
+
+}
+//-------------------------------------------------------------------------------------------
 
 //span cycling-----------------------------------------------------------------------------
 let currentSpan=0;
@@ -69,7 +159,7 @@ $("#menu-toggle").click(function(e) {
 });
 
 //-----------------------------------------------------------------------------------------------------
-
+// retrive user settings from the database-------------------------------------------------------------
 function getSettings() {
   let url = "http://localhost:8080/read/settingGet";
   let xhr = new XMLHttpRequest();
@@ -78,43 +168,17 @@ function getSettings() {
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhr.addEventListener("readystatechange", function(e) {
     if (xhr.status == 200) {
-      console.log(xhr.response);
-      //receive json from server
+      console.log(JSON.parse(xhr.response));
+      set(JSON.parse(xhr.response));
+
     }
   });
   xhr.send();
 }
+//-----------------------------------------------------------------------------------
 
-function reset() {
-  let url = "http://localhost:8080/read/settingStock";
-  let xhr = new XMLHttpRequest();
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xhr.addEventListener("readystatechange", function(e) {
-    if (xhr.status == 200) {
-      console.log(xhr.response);
-      //receive json from server
-    }
-  });
-  xhr.send();
-}
-
+// store user settings in the database ------------------------------------------------------
 function storeSettings() {
-  let ele = document.getElementsByName("highlight");
-  let highlight = null;
-  for (i = 0; i < ele.length; i++) {
-      if (ele[i].checked) {
-          highlight = ele[i].value;
-      }
-  }
-  let hcolor = document.getElementById("highlight").value;
-  let tcolor = document.getElementById("text").value;
-  let bcolor = document.getElementById("background").value;
-  let fontsize = document.getElementById("fontsize").value;
-  let letterspace = document.getElementById("letterspace").value;
-  let wordspace = document.getElementById("wordspace").value;
-  let lineheight = document.getElementById("lineheight").value;
   let url = "http://localhost:8080/read/settingSave";
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
@@ -125,20 +189,5 @@ function storeSettings() {
       console.log('success');
     }
   });
-  let settings = {
-    highlight,
-    hcolor,
-    tcolor,
-    bcolor,
-    fontsize,
-    letterspace,
-    wordspace,
-    lineheight,
-  };
-  xhr.send(JSON.stringify(settings));
-  let text = document.getElementById("bodytext");
-  text.style.fontSize = fontsize + "px";
-  text.style.letterSpacing = letterspace + "px";
-  text.style.wordSpacing = wordspace + "px";
-  text.style.lineHeight = lineheight + "px";
+  xhr.send(JSON.stringify(gatherSettings()));
 }

@@ -49,7 +49,7 @@ var MyServer = /** @class */ (function () {
         var _this = this;
         // Server stuff: use express instead of http.createServer
         this.server = express();
-        this.port = process.env.PORT;
+        this.port = 8080;
         this.router = express.Router();
         this.theDatabase = db;
         this.router.use(function (request, response, next) {
@@ -91,6 +91,7 @@ var MyServer = /** @class */ (function () {
         this.router.post('/signup', function (req, res) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
+                    this.theDatabase.put();
                     if (req.body.userName === 'bhillard@umass.edu') {
                         res.send(200);
                     }
@@ -109,29 +110,27 @@ var MyServer = /** @class */ (function () {
         // get settings
         this.router.post("/read/settingGet", function (req, res) {
             var settings = {
-                //TO BE swapped out with database info once we have settings tied to accounts
-                'highlight': 'word',
-                'hcolor': 'yellow',
-                'tcolor': 'black',
-                'bcolor': 'white',
-                'fontsize': '18',
-                'letterspace': '0',
-                'wordspace': '0',
-                'lineheight': '24'
+                'fontFamily': '"Roboto Slab", serif',
+                'highlightColor': '#008000',
+                'backgroundColor': '#c0c0c0',
+                'fontColor': '#ff8040',
+                'fontSize': '34',
+                'letterSpacing': '4',
+                'wordSpacing': '7',
+                'lineHeight': '45'
             };
             res.send(JSON.stringify(settings));
         });
         this.router.post("/read/settingStock", function (req, res) {
             var settings = {
-                //TO BE swapped out with database info once we have settings tied to accounts
-                'highlight': 'word',
-                'hcolor': 'yellow',
-                'tcolor': 'black',
-                'bcolor': 'white',
-                'fontsize': '18',
-                'letterspace': '0',
-                'wordspace': '0',
-                'lineheight': '24'
+                'fontFamily': '"Roboto Slab", serif',
+                'highlightColor': '#008000',
+                'backgroundColor': '#c0c0c0',
+                'fontColor': '#ff8040',
+                'fontSize': '34',
+                'letterSpacing': '4',
+                'wordSpacing': '7',
+                'lineHeight': '45'
             };
             res.send(JSON.stringify(settings));
         });

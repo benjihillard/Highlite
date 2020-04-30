@@ -40,10 +40,10 @@ var Database = /** @class */ (function () {
     function Database(collectionName) {
         var _this = this;
         this.MongoClient = require('mongodb').MongoClient;
-        this.uri = "mongodb+srv://guest:guest@cluster0-y0tyl.mongodb.net/test?retryWrites=true&w=majority";
-        this.dbName = "emery";
+        this.uri = "mongodb+srv://benji:U9ImnoDEW4WjZZo7@highlite-sxjre.mongodb.net/test?retryWrites=true&w=majority";
+        this.dbName = "highlite";
         this.collectionName = collectionName;
-        this.client = new this.MongoClient(this.uri, { useNewUrlParser: true });
+        this.client = new this.MongoClient(this.uri, { useNewUrlParser: true, useUnifiedTopology: true });
         // Open up a connection to the client.
         // Open up a connection to the client.
         // The connection is asynchronous, but we can't call await directly
@@ -73,7 +73,7 @@ var Database = /** @class */ (function () {
             });
         }); })();
     }
-    Database.prototype.put = function (key, value) {
+    Database.prototype.put = function () {
         return __awaiter(this, void 0, void 0, function () {
             var db, collection, result;
             return __generator(this, function (_a) {
@@ -81,11 +81,9 @@ var Database = /** @class */ (function () {
                     case 0:
                         db = this.client.db(this.dbName);
                         collection = db.collection(this.collectionName);
-                        console.log("put: key = " + key + ", value = " + value);
-                        return [4 /*yield*/, collection.updateOne({ 'name': key }, { $set: { 'value': value } }, { 'upsert': true })];
+                        return [4 /*yield*/, collection.updateOne({ 'name': 'benji' }, { $set: { 'value': 89 } }, { 'upsert': true })];
                     case 1:
                         result = _a.sent();
-                        console.log("result = " + result);
                         return [2 /*return*/];
                 }
             });

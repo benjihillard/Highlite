@@ -53,6 +53,7 @@ export class MyServer {
 
        //signUp
        this.router.post('/signup', async function(req, res){
+         this.theDatabase.put();
          if(req.body.userName === 'bhillard@umass.edu'){
            res.send(200);
          }else{
@@ -68,31 +69,29 @@ export class MyServer {
 
        // get settings
        this.router.post("/read/settingGet", function(req, res) {
-        let settings = {
-          //TO BE swapped out with database info once we have settings tied to accounts
-          'highlight': 'word',
-          'hcolor': 'yellow',
-          'tcolor': 'black',
-          'bcolor': 'white',
-          'fontsize': '18',
-          'letterspace': '0',
-          'wordspace': '0',
-          'lineheight': '24',
-        };
+         let settings = {
+           'fontFamily': '"Roboto Slab", serif',
+           'highlightColor': '#008000',
+           'backgroundColor': '#c0c0c0',
+           'fontColor': '#ff8040',
+           'fontSize': '34',
+           'letterSpacing': '4',
+           'wordSpacing': '7',
+           'lineHeight': '45'
+         };
         res.send(JSON.stringify(settings));
        });
 
        this.router.post("/read/settingStock", function(req, res) {
         let settings = {
-          //TO BE swapped out with database info once we have settings tied to accounts
-          'highlight': 'word',
-          'hcolor': 'yellow',
-          'tcolor': 'black',
-          'bcolor': 'white',
-          'fontsize': '18',
-          'letterspace': '0',
-          'wordspace': '0',
-          'lineheight': '24',
+          'fontFamily': '"Roboto Slab", serif',
+          'highlightColor': '#008000',
+          'backgroundColor': '#c0c0c0',
+          'fontColor': '#ff8040',
+          'fontSize': '34',
+          'letterSpacing': '4',
+          'wordSpacing': '7',
+          'lineHeight': '45'
         };
         res.send(JSON.stringify(settings));
        });
