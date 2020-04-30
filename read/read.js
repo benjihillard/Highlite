@@ -2,7 +2,7 @@ let backgroundColor;
 let fontColor;
 let highlightColor = document.getElementById('highlight').value;
 
-//span cycling
+//span cycling-----------------------------------------------------------------------------
 let currentSpan=0;
 document.addEventListener('keyup', function (e) {
   console.log(highlightColor);
@@ -54,6 +54,8 @@ $("#option3").click(function(e) {
   e.preventDefault();
   alert("Paragraph highlighting is not currently supported.");
 });
+
+//------------------------------------------------------------------------------------------------------
 
 //sidebar toggle
 $("#menu-toggle").click(function(e) {

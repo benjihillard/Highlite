@@ -23,11 +23,12 @@ export class spanify {
           var sentanceCount = 0;
           parser.addRule(/["’]?[A-Z][^.?!]+((?![.?!][’"]?\s["’]?[A-Z][^.?!]).)+[.?!’"]+/ig, function(tag) {
             sentanceCount++;
-            return "<span class=" + '"' + "sentance" + sentanceCount.toString() + '"' + ">" + tag.substr(0) + "</span>";
+            return "<span class=" + '"' + "sentance" + sentanceCount.toString() + '"' + ">" + " " + tag.substr(0) + "</span>";
           });
           this.spanedText.sentanceString = parser.render(text);
-      });
+          console.log();
 
+      });
       pdf(fileBuffer).then(function(data) {
         var parser = new Parser();
         var text = data.text;
@@ -38,7 +39,7 @@ export class spanify {
           return "<span class=" + '"' + "word" + wordCount.toString() + '"' + ">" + " " + tag.substr(0) + " " + "</span>";
         });
         this.spanedText.wordString = parser.render(text);
-        //console.log(spanedText.wordString);
+        console.log(spanedText.wordString);
 
       });
       pdf(fileBuffer).then(function(data) {
@@ -50,10 +51,12 @@ export class spanify {
           paraCount++;
           return "<span class=" + '"' + "para" + paraCount.toString() + '"' + ">" + tag.substr(0) + "</span>";
         });
+
         this.spanedText.paragraphString = parser.render(text);
       });
     });
     console.log(this.spanedText.wordString);
+
 
     return this.spanedText;
   }
