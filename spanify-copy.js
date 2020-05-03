@@ -54,5 +54,3 @@ function spanify(filePath){
 
   return strings;
 }
-
-spanify("./Unit-4-Paper.pdf");
