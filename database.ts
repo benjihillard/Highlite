@@ -18,8 +18,8 @@ export class Database {
    }
 
    public async update(user , setting) : Promise<void> {
-      await this.collection.updateOne({'user' : user}, { $set : { 'setting' : setting} }, { 'upsert' : true } );
-   }
+    await this.collection.updateOne({'user' : user}, { $set : { 'setting' : setting} }, { 'upsert' : true } );
+  }
 
    public async get(x) : Promise<string> {
      let result = await this.collection.findOne(x);
