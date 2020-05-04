@@ -42,12 +42,14 @@ var express = require('express');
 var formidable = require('formidable');
 var bodyParser = require('body-parser');
 var path = require('path');
+var sessions = require('express-session');
+var fs = require('fs');
+var session;
 var spanify_1 = require("./spanify");
 var span = new spanify_1.spanify();
 var MyServer = /** @class */ (function () {
     function MyServer(db) {
         var _this = this;
-        // Server stuff: use express instead of http.createServer
         this.server = express();
         this.port = 8080;
         this.router = express.Router();
@@ -62,7 +64,67 @@ var MyServer = /** @class */ (function () {
         this.server.use('/read', express.static('./read'));
         this.server.use(bodyParser.urlencoded({ extended: false }));
         this.server.use(bodyParser.json());
+        this.server.use(sessions({
+            secret: '*&^*^TFtgi67rf56f56^Rir56',
+            resave: false,
+            saveUninitialized: true
+        }));
         this.server.use('/', this.router);
+        //getJSON ----------------------------------------------------------------
+        this.router.post('/read/getJSON', function (req, res) {
+            return __awaiter(this, void 0, void 0, function () {
+                var obj;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, fs.readFileSync(__dirname + '/uploads/span.json', 'utf8')];
+                        case 1:
+                            obj = _a.sent();
+                            console.log(JSON.parse(obj));
+                            if (obj !== null || obj !== undefined) {
+                                res.send(JSON.parse(obj));
+                            }
+                            else {
+                                res.sendStatus(400);
+                            }
+                            return [2 /*return*/];
+                    }
+                });
+            });
+        });
+        //------------------------------------------------------------------------------
+        // Logout ----------------------------------------------------------------
+        this.router.post('/logout', function (req, res) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    session = undefined;
+                    if (session === undefined) {
+                        res.sendStatus(200);
+                    }
+                    else {
+                        res.sendStatus(400);
+                    }
+                    return [2 /*return*/];
+                });
+            });
+        });
+        //------------------------------------------------------------------------------
+        // get Sessions ----------------------------------------------------------------
+        this.router.post('/getSession', function (req, res) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    console.log(session);
+                    if (session === undefined) {
+                        res.sendStatus(400);
+                    }
+                    else {
+                        res.send(session.uniqueID);
+                    }
+                    return [2 /*return*/];
+                });
+            });
+        });
+        //------------------------------------------------------------------------------
+        // file drop -------------------------------------------------------------------
         this.router.post('/filedrop', function (req, res) {
             return __awaiter(this, void 0, void 0, function () {
                 var form;
@@ -71,69 +133,121 @@ var MyServer = /** @class */ (function () {
                     form.parse(req);
                     form.on('fileBegin', function (name, file) {
                         file.path = __dirname + '/uploads/' + file.name;
-                        console.log(span.spanify(file.path).wordString);
+                        console.log('spanify call');
+                        span.spanify(file.path);
                     });
-                    res.send(200);
+                    res.sendStatus(200);
                     return [2 /*return*/];
                 });
             });
         });
-        //logging in
+        //------------------------------------------------------------------------------
+        //logging in -------------------------------------------------------------------
         this.router.post('/login', function (req, res) {
-            if (req.body.userName === 'bhillard@umass.edu') {
-                res.send(200);
-            }
-            else {
-                res.send(400);
-            }
+            return __awaiter(this, void 0, void 0, function () {
+                var user;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            user = req.body.user;
+                            return [4 /*yield*/, db.isFound(user)];
+                        case 1:
+                            if (_a.sent()) {
+                                session = req.session;
+                                session.uniqueID = req.body.user;
+                                res.sendStatus(200);
+                            }
+                            else {
+                                res.sendStatus(400);
+                            }
+                            return [2 /*return*/];
+                    }
+                });
+            });
         });
-        //signUp
+        //------------------------------------------------------------------------------
+        //signUp------------------------------------------------------------------------
         this.router.post('/signup', function (req, res) {
             return __awaiter(this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    this.theDatabase.put();
-                    if (req.body.userName === 'bhillard@umass.edu') {
-                        res.send(200);
+                var user, _a, _b, setting, settingJSON;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            user = req.body.user;
+                            _b = (_a = console).log;
+                            return [4 /*yield*/, db.isFound(user)];
+                        case 1:
+                            _b.apply(_a, [_c.sent()]);
+                            return [4 /*yield*/, db.isFound(user)];
+                        case 2:
+                            if (!_c.sent()) return [3 /*break*/, 3];
+                            res.sendStatus(400);
+                            return [3 /*break*/, 5];
+                        case 3:
+                            setting = {
+                                'fontFamily': 'Faustina, serif',
+                                'highlightColor': '#11b7ee',
+                                'backgroundColor': '#ebdecb',
+                                'fontColor': '#000000',
+                                'fontSize': '22',
+                                'letterSpacing': '2',
+                                'wordSpacing': '5',
+                                'lineHeight': '45'
+                            };
+                            settingJSON = JSON.stringify(setting);
+                            return [4 /*yield*/, db.put({ 'user': user, 'setting': settingJSON })];
+                        case 4:
+                            _c.sent();
+                            session = req.session;
+                            session.uniqueID = req.body.user;
+                            res.sendStatus(200);
+                            _c.label = 5;
+                        case 5: return [2 /*return*/];
                     }
-                    else {
-                        res.send(400);
-                    }
-                    return [2 /*return*/];
                 });
             });
         });
-        // save settings
+        //------------------------------------------------------------------------------
+        // save settings----------------------------------------------------------------
         this.router.post("/read/settingSave", function (req, res) {
-            console.log(req.body);
-            res.send(200);
+            if (session === undefined) {
+                res.sendStatus(400);
+            }
+            else {
+                db.update(session.uniqueID, JSON.stringify(req.body));
+            }
         });
-        // get settings
+        //------------------------------------------------------------------------------
+        // get settings-----------------------------------------------------------------
         this.router.post("/read/settingGet", function (req, res) {
-            var settings = {
-                'fontFamily': '"Roboto Slab", serif',
-                'highlightColor': '#008000',
-                'backgroundColor': '#c0c0c0',
-                'fontColor': '#ff8040',
-                'fontSize': '34',
-                'letterSpacing': '4',
-                'wordSpacing': '7',
-                'lineHeight': '45'
-            };
-            res.send(JSON.stringify(settings));
+            return __awaiter(this, void 0, void 0, function () {
+                var setting_1, setting;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (session.uniqueID === undefined) {
+                                setting_1 = {
+                                    'fontFamily': '"Roboto Slab", serif',
+                                    'highlightColor': '#008000',
+                                    'backgroundColor': '#c0c0c0',
+                                    'fontColor': '#ff8040',
+                                    'fontSize': '34',
+                                    'letterSpacing': '4',
+                                    'wordSpacing': '7',
+                                    'lineHeight': '45'
+                                };
+                                res.send(JSON.stringify(setting_1));
+                            }
+                            return [4 /*yield*/, db.get({ 'user': session.uniqueID })];
+                        case 1:
+                            setting = _a.sent();
+                            res.send(setting.setting);
+                            return [2 /*return*/];
+                    }
+                });
+            });
         });
-        this.router.post("/read/settingStock", function (req, res) {
-            var settings = {
-                'fontFamily': '"Roboto Slab", serif',
-                'highlightColor': '#008000',
-                'backgroundColor': '#c0c0c0',
-                'fontColor': '#ff8040',
-                'fontSize': '34',
-                'letterSpacing': '4',
-                'wordSpacing': '7',
-                'lineHeight': '45'
-            };
-            res.send(JSON.stringify(settings));
-        });
+        //------------------------------------------------------------------------------
         //everything else
         this.router.post('*', function (request, response) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -142,9 +256,12 @@ var MyServer = /** @class */ (function () {
             });
         }); });
     }
+    //------------------------------------------------------------------------------
+    //listen------------------------------------------------------------------------
     MyServer.prototype.listen = function (port) {
         this.server.listen(port);
     };
     return MyServer;
 }());
 exports.MyServer = MyServer;
+//------------------------------------------------------------------------------

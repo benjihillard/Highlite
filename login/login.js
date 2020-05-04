@@ -1,4 +1,6 @@
-//sidebar
+let url = 'http://localhost:8080/'
+isloggedIn();
+//sidebar-----------------------------------------------------------------------
 $("#menu-toggle").click(function(e) {
   e.preventDefault();
   $("#wrapper").toggleClass("toggled");
@@ -8,22 +10,22 @@ $("#menu-toggle").click(function(e) {
     $("#arrow").attr('src','images/arrow.png');
   }
 });
-
-//hover
+//------------------------------------------------------------------------------
+//hover-------------------------------------------------------------------------
 $(".h4").hover(function(){
   $("#upload").css("transform", "scale(1.1,1.1)");
   }, function(){
   $("#upload").css("transform", "scale(1,1)");
 });
-
-//drag
+//------------------------------------------------------------------------------
+//drag--------------------------------------------------------------------------
 function dragOverHandler(ev) {
   $("#upload").css("transform", "scale(1.1,1.1)");
   // Prevent default behavior (Prevent file from being opened)
   ev.preventDefault();
 }
-
-//drag leave
+//------------------------------------------------------------------------------
+//drag leave--------------------------------------------------------------------
 function dragLeaveHandler(ev) {
   $("#upload").css("transform", "scale(1,1)");
   // Prevent default behavior (Prevent file from being opened)
@@ -35,8 +37,8 @@ let dropArea = document.getElementById("drop-area");
   dropArea.addEventListener(eventName, preventDefaults, false)
   document.body.addEventListener(eventName, preventDefaults, false)
 })
-
-// Handle dropped files
+//------------------------------------------------------------------------------
+// Handle dropped files---------------------------------------------------------
 dropArea.addEventListener('drop', handleDrop, false);
 
 function preventDefaults (e) {
@@ -59,21 +61,20 @@ function handleFiles(files) {
   if(file.type != 'application/pdf'){
     alert('sorry PDFs only please');
   }
-  console.log(file);
   uploadFile(file);
 }
+//------------------------------------------------------------------------------
 
+// upload to server-------------------------------------------------------------
 function uploadFile(file) {
-  let url = 'http://localhost:8080/filedrop'
+  let route = 'filedrop'
   let xhr = new XMLHttpRequest();
   let formData = new FormData();
-  xhr.open('POST', url, true);
+  xhr.open('POST', url+route, true);
   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
   xhr.addEventListener('readystatechange', function(e) {
     if (xhr.readyState == 4 && xhr.status == 200) {
-      console.log('you made it');
-      window.location.href = "http://localhost:8080/read";
-
+      window.location.href = url + "read";
     }
     else if (xhr.readyState == 4 && xhr.status != 200) {
       alert('sorry something went wrong');
@@ -84,18 +85,17 @@ function uploadFile(file) {
   formData.append('file', file)
   xhr.send(formData)
 }
+//------------------------------------------------------------------------------
 
-
-//Login
+//Login-------------------------------------------------------------------------
 function login(){
-  let url = 'http://localhost:8080/login';
+  let route = 'login';
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', url, true);
+  xhr.open('POST', url+route, true);
   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  let userName = document.getElementById("userName").value;
-  console.log(userName);
-  if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userName))){
+  let user = document.getElementById("userName").value;
+  if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(user))){
     document.getElementById("warning").innerHTML = "please put in a valid email";
     document.getElementById("warning").style.display = "block";
     return;
@@ -104,8 +104,7 @@ function login(){
   }
   xhr.addEventListener('readystatechange', function(e) {
     if (xhr.readyState == 4 && xhr.status == 200) {
-      console.log('you made it');
-      document.getElementById("displayName").innerHTML = userName;
+      document.getElementById("displayName").innerHTML = user;
       document.getElementById("login").style.display = "none";
       document.getElementById("welcome").style.display = "block";
 
@@ -115,30 +114,30 @@ function login(){
       document.getElementById("warning").style.display = "block";
     }
   });
-  let params = {'userName' : userName}
+  let params = {'user' : user}
   xhr.send(JSON.stringify(params));
 }
+//------------------------------------------------------------------------------
 
-//signUp
+//signUp------------------------------------------------------------------------
 function signUp(){
-  let url = 'http://localhost:8080/signup';
+  let route = 'signup';
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', url, true);
+  xhr.open('POST', url+route, true);
   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  let userName = document.getElementById("userName").value;
-  if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userName))){
+  let user = document.getElementById("userName").value;
+  if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(user))){
     document.getElementById("warning").innerHTML = "please put in a valid email";
     document.getElementById("warning").style.display = "block";
     return;
   }else{
     document.getElementById("warning").style.display = "none";
   }
-  console.log(userName);
   xhr.addEventListener('readystatechange', function(e) {
     if (xhr.readyState == 4 && xhr.status == 200) {
       document.getElementById("greeting").innerHTML = "Welcome to Highlite";
-      document.getElementById("displayName").innerHTML = userName;
+      document.getElementById("displayName").innerHTML = user;
       document.getElementById("login").style.display = "none";
       document.getElementById("welcome").style.display = "block";
 
@@ -148,6 +147,48 @@ function signUp(){
       document.getElementById("warning").style.display = "block";
     }
   });
-  let params = {'userName' : userName}
+  let params = {'user': user}
   xhr.send(JSON.stringify(params));
 }
+//------------------------------------------------------------------------------
+
+// check to see if logged in----------------------------------------------------
+function isloggedIn(){
+  let route = 'getSession';
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', url+route, true);
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhr.addEventListener('readystatechange', function(e) {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      document.getElementById("displayName").innerHTML = xhr.response;
+      document.getElementById("login").style.display = "none";
+      document.getElementById("welcome").style.display = "block";
+    }
+    else if (xhr.readyState == 4 && xhr.status != 200) {
+
+    }
+  });
+  xhr.send();
+}
+//------------------------------------------------------------------------------
+
+// Logout-----------------------------------------------------------------------
+
+function logout(){
+  let route = 'logout';
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', url+route, true);
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhr.addEventListener('readystatechange', function(e) {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      window.location.href = url;
+    }
+    else if (xhr.readyState == 4 && xhr.status != 200) {
+      alert('There was a problem logging out')
+    }
+  });
+  xhr.send();
+}
+//------------------------------------------------------------------------------

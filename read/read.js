@@ -1,4 +1,5 @@
-// getting settings
+let url = 'http://localhost:8080/';
+getJSON();
 let settings = getSettings()
 // declairng buttons
 let backgroundColor = document.getElementById('background');
@@ -72,9 +73,14 @@ function gatherSettings(){
 //----------------------------------------------------------------------------------------
 
 // apply some JSON settings----------------------------------------------------------
+function get(json) {
+    obj = json;
+}
+//-------------------------------------------------------------------------------------------
+
+// apply some JSON settings----------------------------------------------------------
 function set(setting) {
     text.style.fontFamily = setting.fontFamily;
-    console.log(setting.fontFamily);
     highlightColor.value = setting.highlightColor;
     backgroundColor.value = setting.backgroundColor;
     fontColor.value = setting.fontColor;
@@ -93,14 +99,14 @@ function set(setting) {
 //-------------------------------------------------------------------------------------------
 
 //span cycling-----------------------------------------------------------------------------
+console.log(window.value);
+
 let currentSpan=0;
 document.addEventListener('keyup', function (e) {
-  console.log(highlightColor.value);
   if(e.defaultPrevented){
     return;
   }
   var key = e.keyCode;
-  console.log('keypress detected: '+key);
   let array = document.getElementById("bodytext").children;
   if(key === 37){//keycode for left arrow
     if (!(currentSpan===0)){
@@ -113,7 +119,6 @@ document.addEventListener('keyup', function (e) {
     }
   }
   if(document.getElementById("option1").checked){
-    console.log('option1 selected');
 
     for(let i=0; i<array.length; ++i){
       array[i].style.backgroundColor="transparent";
@@ -121,7 +126,6 @@ document.addEventListener('keyup', function (e) {
     document.getElementsByClassName('word'+(currentSpan+480))[0].style.backgroundColor=highlightColor.value;
   }
   if(document.getElementById('option2').checked){
-    console.log('option2 selected');
     for(let i=0; i<array.length; ++i){
       array[i].style.backgroundColor="transparent";
     }
@@ -161,33 +165,71 @@ $("#menu-toggle").click(function(e) {
 //-----------------------------------------------------------------------------------------------------
 // retrive user settings from the database-------------------------------------------------------------
 function getSettings() {
-  let url = "http://localhost:8080/read/settingGet";
+  let route = "read/settingGet";
   let xhr = new XMLHttpRequest();
-  xhr.open("POST", url, true);
+  xhr.open("POST", url + route, true);
   xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhr.addEventListener("readystatechange", function(e) {
-    if (xhr.status == 200) {
-      console.log(JSON.parse(xhr.response));
+    if (xhr.readyState == 4 && xhr.status == 200) {
       set(JSON.parse(xhr.response));
+    }else if (xhr.readyState == 4 && xhr.status == 400) {
 
     }
   });
   xhr.send();
 }
-//-----------------------------------------------------------------------------------
-
+//-------------------------------------------------------------------------------------------
 // store user settings in the database ------------------------------------------------------
 function storeSettings() {
-  let url = "http://localhost:8080/read/settingSave";
+  let route = "read/settingSave";
   let xhr = new XMLHttpRequest();
-  xhr.open("POST", url, true);
+  xhr.open("POST", url + route, true);
   xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhr.addEventListener("readystatechange", function(e) {
-    if (xhr.status == 200) {
-      console.log('success');
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      alert('Settings Saved')
+      return;
+    }else if (xhr.readyState == 4 && xhr.status == 400) {
+      alert('Sorry this is a logged in feature only. Loggin or Sign Up if you want to save.');
+      return;
     }
   });
   xhr.send(JSON.stringify(gatherSettings()));
 }
+//------------------------------------------------------------------------------
+
+// store user settings in the database ------------------------------------------------------
+async function getJSON(strings) {
+
+  let route = "read/getJSON";
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url + route, true);
+  xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhr.addEventListener("readystatechange", await function(e) {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      /*
+
+
+          ITS HERE
+
+
+      */
+      console.log(JSON.parse(xhr.response));
+      /*
+
+
+          ^^ UP HERES
+
+      */
+    }else if (xhr.readyState == 4 && xhr.status == 400) {
+      alert('Sorry this is a logged in feature only. Loggin or Sign Up if you want to save.');
+      return;
+    }
+
+  });
+  xhr.send();
+}
+//------------------------------------------------------------------------------
