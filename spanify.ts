@@ -39,7 +39,7 @@ export class spanify {
           return "<span class=" + '"' + "word" + wordCount.toString() + '"' + ">" + " " + tag.substr(0) + " " + "</span>";
         });
         this.spanedText.wordString = parser.render(text);
-        console.log(spanedText.wordString);
+        console.log(this.spanedText.wordString);
 
       });
       pdf(fileBuffer).then(function(data) {
