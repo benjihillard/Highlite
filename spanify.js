@@ -1,55 +1,46 @@
 "use strict";
 exports.__esModule = true;
-var fs = require('fs');
 var pdf = require('pdf-parse');
 var Parser = require("simple-text-parser");
+var fs = require('fs');
 var spanify = /** @class */ (function () {
     function spanify() {
-        this.spanedText = {
-            'sentanceString': this.sentanceString,
-            'wordString': this.wordString,
-            'paragraphString': this.paragraphString
-        };
     }
     spanify.prototype.spanify = function (filePath) {
-        fs.readFile(filePath, function (err, data) {
-            var fileBuffer = data;
-            pdf(fileBuffer).then(function (data) {
-                var parser = new Parser();
-                var text = data.text;
-                var sentanceCount = 0;
-                parser.addRule(/["’]?[A-Z][^.?!]+((?![.?!][’"]?\s["’]?[A-Z][^.?!]).)+[.?!’"]+/ig, function (tag) {
-                    sentanceCount++;
-                    return "<span class=" + '"' + "sentance" + sentanceCount.toString() + '"' + ">" + " " + tag.substr(0) + "</span>";
-                });
-                this.spanedText.sentanceString = parser.render(text);
-                console.log();
+        var dataBuffer = fs.readFileSync(filePath);
+        pdf(dataBuffer).then(function (data) {
+            var spannedText = {
+                'sentance': 'string error',
+                'word': 'string error',
+                'paragraph': 'string error'
+            };
+            var parser = new Parser();
+            var text = data.text;
+            var sentanceCount = 0;
+            var wordCount = 0;
+            var paraCount = 0;
+            parser.addRule(/["’]?[A-Z][^.?!]+((?![.?!][’"]?\s["’]?[A-Z][^.?!]).)+[.?!’"]+/ig, function (tag) {
+                sentanceCount++;
+                return "<span class=" + '"' + "sentance" + sentanceCount.toString() + '"' + ">" + " " + tag.substr(0) + "</span>";
             });
-            pdf(fileBuffer).then(function (data) {
-                var parser = new Parser();
-                var text = data.text;
-                var wordCount = 0;
-                parser.addRule(/(([\S]+))/ig, function (tag) {
-                    wordCount++;
-                    return "<span class=" + '"' + "word" + wordCount.toString() + '"' + ">" + " " + tag.substr(0) + " " + "</span>";
-                });
-                this.spanedText.wordString = parser.render(text);
-                console.log(spanedText.wordString);
+            spannedText.sentance = parser.render(text);
+            parser.addRule(/(([\S]+))/ig, function (tag) {
+                wordCount++;
+                return "<span class=" + '"' + "word" + wordCount.toString() + '"' + ">" + " " + tag.substr(0) + " " + "</span>";
             });
-            pdf(fileBuffer).then(function (data) {
-                var parser = new Parser();
-                var text = data.text;
-                var paraCount = 0;
-                //(.+)((\r?\n.+)*)
-                parser.addRule(/[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*/ig, function (tag) {
-                    paraCount++;
-                    return "<span class=" + '"' + "para" + paraCount.toString() + '"' + ">" + tag.substr(0) + "</span>";
-                });
-                this.spanedText.paragraphString = parser.render(text);
+            spannedText.word = parser.render(text);
+            //(.+)((\r?\n.+)*)
+            parser.addRule(/[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*/ig, function (tag) {
+                paraCount++;
+                return "<span class=" + '"' + "para" + paraCount.toString() + '"' + ">" + tag.substr(0) + "</span>";
+            });
+            spannedText.paragraph = parser.render(text);
+            fs.writeFile(__dirname + "/uploads/span.json", JSON.stringify(spannedText), function (err) {
+                if (err)
+                    throw err;
+                console.log('The file has been saved!');
             });
         });
-        console.log(this.spanedText.wordString);
-        return this.spanedText;
     };
     return spanify;
 }());

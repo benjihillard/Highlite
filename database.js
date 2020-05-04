@@ -37,73 +37,49 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var Database = /** @class */ (function () {
-    function Database(collectionName) {
+    function Database() {
         var _this = this;
         this.MongoClient = require('mongodb').MongoClient;
-        this.uri = "mongodb+srv://benji:U9ImnoDEW4WjZZo7@highlite-sxjre.mongodb.net/test?retryWrites=true&w=majority";
-        this.dbName = "highlite";
-        this.collectionName = collectionName;
+        this.uri = "mongodb+srv://benji:Highlite88@cluster0-iqtnz.mongodb.net/test?retryWrites=true&w=majority";
         this.client = new this.MongoClient(this.uri, { useNewUrlParser: true, useUnifiedTopology: true });
-        // Open up a connection to the client.
-        // Open up a connection to the client.
-        // The connection is asynchronous, but we can't call await directly
-        // in the constructor, which cannot be async. So, we use "IIFE". Explanation below.
-        /* from https://anthonychu.ca/post/async-await-typescript-nodejs/
-    
-          Async/Await and the Async IIFE
-    
-          The await keyword can only be used inside of a function
-          marked with the async keyword. [...] One way to do this is
-          with an "async IIFE" (immediately invoked function
-          expression)...
-    
-           (async () => {
-           // code goes here
-           })();
-    
-        */
-        (function () { return __awaiter(_this, void 0, void 0, function () {
+        this.client.connect(function (err) {
+            _this.collection = _this.client.db("test").collection("devices");
+        });
+    }
+    Database.prototype.put = function (x) {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.client.connect()["catch"](function (err) { console.log(err); })];
+                    case 0: return [4 /*yield*/, this.collection.insertOne(x)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
                 }
             });
-        }); })();
-    }
-    Database.prototype.put = function () {
+        });
+    };
+    Database.prototype.update = function (user, setting) {
         return __awaiter(this, void 0, void 0, function () {
-            var db, collection, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        db = this.client.db(this.dbName);
-                        collection = db.collection(this.collectionName);
-                        return [4 /*yield*/, collection.updateOne({ 'name': 'benji' }, { $set: { 'value': 89 } }, { 'upsert': true })];
+                    case 0: return [4 /*yield*/, this.collection.updateOne({ 'user': user }, { $set: { 'setting': setting } }, { 'upsert': true })];
                     case 1:
-                        result = _a.sent();
+                        _a.sent();
                         return [2 /*return*/];
                 }
             });
         });
     };
-    Database.prototype.get = function (key) {
+    Database.prototype.get = function (x) {
         return __awaiter(this, void 0, void 0, function () {
-            var db, collection, result;
+            var result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        db = this.client.db(this.dbName);
-                        collection = db.collection(this.collectionName);
-                        console.log("get: key = " + key);
-                        return [4 /*yield*/, collection.findOne({ 'name': key })];
+                    case 0: return [4 /*yield*/, this.collection.findOne(x)];
                     case 1:
                         result = _a.sent();
-                        console.log("get: returned " + JSON.stringify(result));
                         if (result) {
-                            return [2 /*return*/, result.value];
+                            return [2 /*return*/, result];
                         }
                         else {
                             return [2 /*return*/, null];
@@ -113,36 +89,15 @@ var Database = /** @class */ (function () {
             });
         });
     };
-    Database.prototype.del = function (key) {
+    Database.prototype.isFound = function (user) {
         return __awaiter(this, void 0, void 0, function () {
-            var db, collection, result;
+            var result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        db = this.client.db(this.dbName);
-                        collection = db.collection(this.collectionName);
-                        console.log("delete: key = " + key);
-                        return [4 /*yield*/, collection.deleteOne({ 'name': key })];
+                    case 0: return [4 /*yield*/, this.collection.findOne({ user: user })];
                     case 1:
                         result = _a.sent();
-                        console.log("result = " + result);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Database.prototype.isFound = function (key) {
-        return __awaiter(this, void 0, void 0, function () {
-            var v;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        console.log("isFound: key = " + key);
-                        return [4 /*yield*/, this.get(key)];
-                    case 1:
-                        v = _a.sent();
-                        console.log("is found result = " + v);
-                        if (v === null) {
+                        if (result === null) {
                             return [2 /*return*/, false];
                         }
                         else {
