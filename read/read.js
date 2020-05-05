@@ -209,24 +209,8 @@ async function getJSON(option) {
       /*
           ITS HERE
       */
-      let receivedJSON = JSON.parse(xhr.response);
-      console.log(receivedJSON);
-      /*
-          ^^ UP HERES
-      */
-     //here's where it *should* actually print to the screen when you click the appropriate radio buttons. It'd be cool to also have a default version.
-     if(option === 1){
-      document.getElementById("bodytext").innerHTML = receivedJSON.word;
-     }
-     else if(option === 2){
-      document.getElementById("bodytext").innerHTML = receivedJSON.sentance;
-     }
-     else if(option === 3){
-      document.getElementById("bodytext").innerHTML = receivedJSON.paragraph;
-     }
-    }else if (xhr.readyState == 4 && xhr.status == 400) {
-      alert('Sorry this is a logged in feature only. Loggin or Sign Up if you want to save.');
-      return;
+      console.log(JSON.parse(xhr.response));
+
     }
 
   });

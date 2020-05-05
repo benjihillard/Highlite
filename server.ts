@@ -6,4 +6,4 @@ import { MyServer } from './routes';
 const theDatabase = new Database();
 const theServer = new MyServer(theDatabase);
 
-theServer.listen(process.env.PORT);
+theServer.listen(8080);
