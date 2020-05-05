@@ -12,23 +12,23 @@ export class Database {
       this.collection = this.client.db("test").collection("devices");
     });
   }
-
+//------------------put -------------------------------------------------------------------------
    public async put(x) : Promise<void> {
       await this.collection.insertOne(x);
    }
+//--------------------------------------------------------------------------------------------------
 
-   public async update(user , setting) : Promise<void> {
-      await this.collection.updateOne({'user' : user}, { $set : { 'setting' : setting} }, { 'upsert' : true } );
-   }
+// update ---------------------------------------------------------------------------------------------
 
-   public async get(x) : Promise<string> {
-     let result = await this.collection.findOne(x);
-     if (result) {
-       return result;
-     } else {
-       return null;
-     }
-   }
+
+// ------------------------------------------------------------------------------------------------------
+
+// get----------------------------------------------------------------------------------------------------
+
+
+  //----------------------------------------------------------------------------------------------------------
+
+  // isfound-----------------------------------------------------------------------------------------------
 
    public async isFound(user) : Promise<boolean> {
       let result = await this.collection.findOne({user : user});
@@ -38,5 +38,6 @@ export class Database {
     	    return true;
     	}
     }
+//--------------------------------------------------------------------------------------------------------
 
 }

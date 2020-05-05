@@ -93,72 +93,20 @@ export class MyServer {
 //------------------------------------------------------------------------------
 
 //logging in -------------------------------------------------------------------
-       this.router.post('/login', async function(req, res){
-         let user = req.body.user
-         if(await db.isFound(user)){
-           session = req.session;
-           session.uniqueID = req.body.user
-           res.sendStatus(200)
-         }else{
-           res.sendStatus(400);
-         }
-       });
+  
 //------------------------------------------------------------------------------
 
 //signUp------------------------------------------------------------------------
-       this.router.post('/signup', async function(req, res){
-         let user = req.body.user;
-         console.log(await db.isFound(user));
-         if(await db.isFound(user)){
-           res.sendStatus(400)
-         }else{
-           let setting = {
-              'fontFamily' : 'Faustina, serif',
-              'highlightColor': '#11b7ee',
-              'backgroundColor' : '#ebdecb',
-              'fontColor' : '#000000',
-              'fontSize' : '22',
-              'letterSpacing' : '2',
-              'wordSpacing' : '5',
-              'lineHeight' : '45'
-           }
-           let settingJSON = JSON.stringify(setting);
-           await db.put({ 'user' : user, 'setting' : settingJSON});
-           session = req.session;
-           session.uniqueID = req.body.user;
-           res.sendStatus(200)
-         }
-       });
+
 //------------------------------------------------------------------------------
 
 // save settings----------------------------------------------------------------
-       this.router.post("/read/settingSave", function(req, res) {
-         if(session === undefined){
-           res.sendStatus(400);
-         }else{
-           db.update(session.uniqueID,JSON.stringify(req.body));
-         }
-       });
+
+
 //------------------------------------------------------------------------------
 
 // get settings-----------------------------------------------------------------
-       this.router.post("/read/settingGet",async function(req, res) {
-         if(session.uniqueID === undefined){
-           let setting = {
-             'fontFamily': '"Roboto Slab", serif',
-             'highlightColor': '#008000',
-             'backgroundColor': '#c0c0c0',
-             'fontColor': '#ff8040',
-             'fontSize': '34',
-             'letterSpacing': '4',
-             'wordSpacing': '7',
-             'lineHeight': '45'
-           };
-           res.send(JSON.stringify(setting));
-         }
-        let setting = await db.get({'user' : session.uniqueID });
-        res.send(setting.setting);
-       });
+
 //------------------------------------------------------------------------------
 
 //everything else
