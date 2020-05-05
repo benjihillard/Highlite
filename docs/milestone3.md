@@ -31,3 +31,6 @@ Alden Burgess (Github: aldenburgess):
 * Tuned word/Sentence/Paragraph option functionality
 * Heroku deployment patch
 
+# heroku link
+
+* https://highlite2.herokuapp.com/ 
