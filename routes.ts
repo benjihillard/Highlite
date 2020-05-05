@@ -14,7 +14,7 @@ export class MyServer {
 
     public theDatabase;
     private server = express();
-    private port = 8080;
+    private port =  process.env.PORT;
     private router = express.Router();
 
 

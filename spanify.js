@@ -7,13 +7,17 @@ var spanify = /** @class */ (function () {
     function spanify() {
     }
     spanify.prototype.spanify = function (filePath) {
+        var sentanceString;
+        var wordString;
+        var paragraphString;
+        var strings;
         var dataBuffer = fs.readFileSync(filePath);
         pdf(dataBuffer).then(function (data) {
-            var spannedText = {
-                'sentance': 'string error',
-                'word': 'string error',
-                'paragraph': 'string error'
-            };
+            /*let spannedText = {
+              'sentance' : 'string error',
+              'word' : 'string error',
+              'paragraph' : 'string error',
+            }*/
             var parser = new Parser();
             var text = data.text;
             var sentanceCount = 0;
@@ -23,19 +27,30 @@ var spanify = /** @class */ (function () {
                 sentanceCount++;
                 return "<span class=" + '"' + "sentance" + sentanceCount.toString() + '"' + ">" + " " + tag.substr(0) + "</span>";
             });
-            spannedText.sentance = parser.render(text);
+            //spannedText.sentance = parser.render(text);
+            sentanceString = parser.render(text);
             parser.addRule(/(([\S]+))/ig, function (tag) {
                 wordCount++;
                 return "<span class=" + '"' + "word" + wordCount.toString() + '"' + ">" + " " + tag.substr(0) + " " + "</span>";
             });
-            spannedText.word = parser.render(text);
+            //spannedText.word = parser.render(text);
+            wordString = parser.render(text);
             //(.+)((\r?\n.+)*)
             parser.addRule(/[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*/ig, function (tag) {
                 paraCount++;
                 return "<span class=" + '"' + "para" + paraCount.toString() + '"' + ">" + tag.substr(0) + "</span>";
             });
-            spannedText.paragraph = parser.render(text);
-            fs.writeFile(__dirname + "/uploads/span.json", JSON.stringify(spannedText), function (err) {
+            //spannedText.paragraph = parser.render(text);
+            paragraphString = parser.render(text);
+            setTimeout(function () {
+                strings = {
+                    "sentences": sentanceString,
+                    "words": wordString,
+                    "paragraphs": paragraphString
+                };
+                //console.log(strings);
+            }, 100);
+            fs.writeFile(__dirname + "/uploads/span.json", JSON.stringify(strings), function (err) {
                 if (err)
                     throw err;
                 console.log('The file has been saved!');

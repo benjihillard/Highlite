@@ -51,7 +51,7 @@ var MyServer = /** @class */ (function () {
     function MyServer(db) {
         var _this = this;
         this.server = express();
-        this.port = 8080;
+        this.port = process.env.PORT;
         this.router = express.Router();
         this.theDatabase = db;
         this.router.use(function (request, response, next) {
