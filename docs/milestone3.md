@@ -17,8 +17,7 @@ being some default setting asigned to the users
 # contributions
 
 Benjamin Hillard (Github: benjihillard):
-
-made Spanify 1.0
+* made Spanify 1.0
 * did the put and isfound data base functions
 * touched up client and login JS
 * added some buttons and some calles to the server
@@ -30,6 +29,16 @@ Alden Burgess (Github: aldenburgess):
 * integrated getJSON with read page HTML
 * Tuned word/Sentence/Paragraph option functionality
 * Heroku deployment patch
+
+
+Corey Sarkis (Github: csarkis7):
+* Updated spanify typescript file that parses text
+* Properly set and stored parsed strings into a JSON object
+* Tried to help with working on some of the background code
+* I just wanted to make a note here about the issue I reached out to the instructors about. I wasn't able to run the server on  
+  my machine so I couldn't really work and test the backend code.
+* Also, a major refactoring of the code was done and now in insights, it shows that I didn't make any commits until the end of 
+  last month. This is obviosuly not true, and I'm not sure why it shows that.
 
 # heroku link
 
