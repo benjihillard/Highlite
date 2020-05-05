@@ -1,5 +1,6 @@
 let url = 'http://localhost:8080/';
 // getting settings
+getJSON()
 let settings = getSettings()
 // declairng buttons
 let backgroundColor = document.getElementById('background');
@@ -189,5 +190,34 @@ function storeSettings() {
     }
   });
   xhr.send(JSON.stringify(gatherSettings()));
+}
+//------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
+
+// store user settings in the database ------------------------------------------------------
+async function getJSON() {
+
+  let route = "read/getJSON";
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url + route, true);
+  xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhr.addEventListener("readystatechange", await function(e) {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      /*
+          ITS HERE
+      */
+      console.log(JSON.parse(xhr.response));
+      /*
+          ^^ UP HERES
+      */
+    }else if (xhr.readyState == 4 && xhr.status == 400) {
+      alert('Sorry this is a logged in feature only. Loggin or Sign Up if you want to save.');
+      return;
+    }
+
+  });
+  xhr.send();
 }
 //------------------------------------------------------------------------------
