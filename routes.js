@@ -43,15 +43,19 @@ var formidable = require('formidable');
 var bodyParser = require('body-parser');
 var path = require('path');
 var sessions = require('express-session');
+var multer = require('multer');
 var fs = require('fs');
 var session;
 var spanify_1 = require("./spanify");
 var span = new spanify_1.spanify();
+var upload = multer({
+    dest: __dirname + "/uploads/"
+});
 var MyServer = /** @class */ (function () {
     function MyServer(db) {
         var _this = this;
         this.server = express();
-        this.port = process.env.PORT;
+        this.port = 8080;
         this.router = express.Router();
         this.theDatabase = db;
         this.router.use(function (request, response, next) {
@@ -114,7 +118,7 @@ var MyServer = /** @class */ (function () {
                 return __generator(this, function (_a) {
                     console.log(session);
                     if (session === undefined) {
-                        res.sendStatus(400);
+                        res.sendStatus(201);
                     }
                     else {
                         res.send(session.uniqueID);
@@ -125,21 +129,22 @@ var MyServer = /** @class */ (function () {
         });
         //------------------------------------------------------------------------------
         // file drop -------------------------------------------------------------------
-        this.router.post('/filedrop', function (req, res) {
-            return __awaiter(this, void 0, void 0, function () {
-                var form;
-                return __generator(this, function (_a) {
-                    form = new formidable.IncomingForm();
-                    form.parse(req);
-                    form.on('fileBegin', function (name, file) {
-                        file.path = __dirname + '/uploads/' + file.name;
-                        console.log('spanify call');
-                        span.spanify(file.path);
-                    });
-                    res.sendStatus(200);
-                    return [2 /*return*/];
+        this.router.post('/filedrop', upload.single("file"), function (req, res) {
+            var tempPath = req.file.path;
+            var targetPath = path.join(__dirname, "./uploads/sample.pdf");
+            if (path.extname(req.file.originalname).toLowerCase() === ".pdf") {
+                fs.rename(tempPath, targetPath, function (err) {
+                    console.log('file stored');
+                    span.spanify(__dirname + "/uploads/sample.pdf");
+                    console.log('file spanned');
                 });
-            });
+                res.sendStatus(200);
+            }
+            else {
+                fs.unlink(tempPath, function (err) {
+                    res.status(400);
+                });
+            }
         });
         //------------------------------------------------------------------------------
         //logging in -------------------------------------------------------------------
@@ -221,28 +226,29 @@ var MyServer = /** @class */ (function () {
         // get settings-----------------------------------------------------------------
         this.router.post("/read/settingGet", function (req, res) {
             return __awaiter(this, void 0, void 0, function () {
-                var setting_1, setting;
+                var setting, setting;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
-                            if (session.uniqueID === undefined) {
-                                setting_1 = {
-                                    'fontFamily': '"Roboto Slab", serif',
-                                    'highlightColor': '#008000',
-                                    'backgroundColor': '#c0c0c0',
-                                    'fontColor': '#ff8040',
-                                    'fontSize': '34',
-                                    'letterSpacing': '4',
-                                    'wordSpacing': '7',
-                                    'lineHeight': '45'
-                                };
-                                res.send(JSON.stringify(setting_1));
-                            }
-                            return [4 /*yield*/, db.get({ 'user': session.uniqueID })];
-                        case 1:
+                            if (!(session === undefined)) return [3 /*break*/, 1];
+                            setting = {
+                                'fontFamily': '"Roboto Slab", serif',
+                                'highlightColor': '#008000',
+                                'backgroundColor': '#c0c0c0',
+                                'fontColor': '#ff8040',
+                                'fontSize': '34',
+                                'letterSpacing': '4',
+                                'wordSpacing': '7',
+                                'lineHeight': '45'
+                            };
+                            res.send(JSON.stringify(setting));
+                            return [3 /*break*/, 3];
+                        case 1: return [4 /*yield*/, db.get({ 'user': session.uniqueID })];
+                        case 2:
                             setting = _a.sent();
                             res.send(setting.setting);
-                            return [2 /*return*/];
+                            _a.label = 3;
+                        case 3: return [2 /*return*/];
                     }
                 });
             });

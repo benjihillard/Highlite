@@ -5,17 +5,23 @@ const formidable = require('formidable');
 const bodyParser = require('body-parser')
 const path = require('path');
 const sessions = require('express-session');
+const multer = require('multer');
 let fs = require('fs');
 let session;
 import { spanify } from './spanify';
 const span = new spanify();
+const upload = multer({
+  dest: __dirname + "/uploads/",
+  // you might also want to set some limits: https://github.com/expressjs/multer#limits
+});
 
 export class MyServer {
 
     public theDatabase;
     private server = express();
-    private port =  process.env.PORT;
+    private port = 8080;
     private router = express.Router();
+
 
 
 
@@ -71,7 +77,7 @@ export class MyServer {
         console.log(session);
 
           if(session === undefined){
-            res.sendStatus(400);
+            res.sendStatus(201);
           }else{
             res.send(session.uniqueID);
           }
@@ -80,15 +86,21 @@ export class MyServer {
 
 // file drop -------------------------------------------------------------------
 
-       this.router.post('/filedrop', async function(req, res){
-         var form = new formidable.IncomingForm();
-         form.parse(req);
-         form.on('fileBegin', function (name, file){
-           file.path = __dirname + '/uploads/' + file.name;
-           console.log('spanify call');
-           span.spanify(file.path);
-         });
-         res.sendStatus(200)
+       this.router.post('/filedrop', upload.single("file"),(req, res) => {
+         const tempPath = req.file.path;
+         const targetPath = path.join(__dirname, "./uploads/sample.pdf");
+         if (path.extname(req.file.originalname).toLowerCase() === ".pdf") {
+           fs.rename(tempPath, targetPath, err => {
+             console.log('file stored');
+             span.spanify(__dirname + "/uploads/sample.pdf");
+             console.log('file spanned');
+           });
+           res.sendStatus(200)
+         } else {
+           fs.unlink(tempPath, err => {
+             res.status(400);
+           });
+         }
        });
 //------------------------------------------------------------------------------
 
@@ -143,7 +155,7 @@ export class MyServer {
 
 // get settings-----------------------------------------------------------------
        this.router.post("/read/settingGet",async function(req, res) {
-         if(session.uniqueID === undefined){
+         if(session === undefined){
            let setting = {
              'fontFamily': '"Roboto Slab", serif',
              'highlightColor': '#008000',
@@ -155,9 +167,10 @@ export class MyServer {
              'lineHeight': '45'
            };
            res.send(JSON.stringify(setting));
+         }else{
+           let setting = await db.get({'user' : session.uniqueID });
+           res.send(setting.setting);
          }
-        let setting = await db.get({'user' : session.uniqueID });
-        res.send(setting.setting);
        });
 //------------------------------------------------------------------------------
 

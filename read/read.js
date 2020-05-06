@@ -1,6 +1,5 @@
 let url = 'http://localhost:8080/';
-// getting settings
-getJSON()
+getJSON();
 let settings = getSettings()
 // declairng buttons
 let backgroundColor = document.getElementById('background');
@@ -74,6 +73,10 @@ function gatherSettings(){
 //----------------------------------------------------------------------------------------
 
 // apply some JSON settings----------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------
+
+// apply some JSON settings----------------------------------------------------------
 function set(setting) {
     text.style.fontFamily = setting.fontFamily;
     highlightColor.value = setting.highlightColor;
@@ -94,6 +97,8 @@ function set(setting) {
 //-------------------------------------------------------------------------------------------
 
 //span cycling-----------------------------------------------------------------------------
+console.log(window.value);
+
 let currentSpan=0;
 document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
@@ -116,7 +121,7 @@ document.addEventListener('keyup', function (e) {
     for(let i=0; i<array.length; ++i){
       array[i].style.backgroundColor="transparent";
     }
-    document.getElementsByClassName('word'+(currentSpan+480))[0].style.backgroundColor=highlightColor.value;
+    document.getElementsByClassName('word'+ currentSpan)[0].style.backgroundColor=highlightColor.value;
   }
   if(document.getElementById('option2').checked){
     for(let i=0; i<array.length; ++i){
@@ -124,12 +129,18 @@ document.addEventListener('keyup', function (e) {
     }
     document.getElementsByClassName('sentance'+currentSpan)[0].style.backgroundColor=highlightColor.value;
   }
+  if(document.getElementById('option3').checked){
+    for(let i=0; i<array.length; ++i){
+      array[i].style.backgroundColor="transparent";
+    }
+    document.getElementsByClassName('paragraph'+currentSpan)[0].style.backgroundColor=highlightColor.value;
+  }
 });
 
 //highlighting options radio button click detectors
 $("#option1").click(function(e) {
   e.preventDefault();
-  getJSON(2);
+  getJSON(1);
   currentSpan = 0;
 });
 $("#option2").click(function(e) {
@@ -194,8 +205,6 @@ function storeSettings() {
 }
 //------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------
-
 // store user settings in the database ------------------------------------------------------
 async function getJSON(option) {
 
@@ -206,11 +215,24 @@ async function getJSON(option) {
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhr.addEventListener("readystatechange", await function(e) {
     if (xhr.readyState == 4 && xhr.status == 200) {
-      /*
-          ITS HERE
-      */
+
+      if (option === 1) {
+        text.innerHTML = JSON.parse(xhr.response).word;
+      } else if (option === 2) {
+        text.innerHTML = JSON.parse(xhr.response).sentance;
+      } else if (option === 3) {
+        text.innerHTML = JSON.parse(xhr.response).paragraph;
+      } else {
+        text.innerHTML = JSON.parse(xhr.response).sentance;
+      }
+
+
       console.log(JSON.parse(xhr.response));
 
+
+    }else if (xhr.readyState == 4 && xhr.status == 400) {
+      alert('Sorry this is a logged in feature only. Loggin or Sign Up if you want to save.');
+      return;
     }
 
   });

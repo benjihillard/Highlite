@@ -165,8 +165,8 @@ function isloggedIn(){
       document.getElementById("login").style.display = "none";
       document.getElementById("welcome").style.display = "block";
     }
-    else if (xhr.readyState == 4 && xhr.status != 200) {
-
+    else if (xhr.readyState == 4 && xhr.status == 201) {
+      console.log('user is not logged in');
     }
   });
   xhr.send();

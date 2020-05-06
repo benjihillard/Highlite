@@ -150,6 +150,10 @@ p{
   min-width: 80vw;
 }
 
+.bodytext{
+  padding: 5%;
+}
+
 input[type="color"] {
 	-webkit-appearance: none;
 	display: block;
