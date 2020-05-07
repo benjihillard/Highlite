@@ -1,4 +1,4 @@
-let url = window.location.pathname + '/';
+let url = window.location.href + '/';
 getJSON();
 let settings = getSettings()
 // declairng buttons
