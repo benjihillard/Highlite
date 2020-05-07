@@ -34,11 +34,11 @@ await pdf(dataBuffer).then(function(data) {
   var parser = new Parser();
   var text = data.text;
   var wordCount = 0;
-  parser.addRule(/(([\S]+))/ig, function(tag) {
+  parser.addRule(/[\S]+/ig, function(tag) {
     wordCount++;
     return "<span class=" + '"' + "word" + wordCount.toString() + '"' + ">" + tag.substr(0) + "</span> ";
   });
-  parser.addRule(/(\r\n|\r|\n)+/ig, function(tag) {
+  parser.addRule(/(^M)+/ig, function(tag) {
     return tag.substr(0) + "<br>";
   });
   spannedText.word = parser.render(text);

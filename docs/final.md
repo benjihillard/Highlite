@@ -15,6 +15,48 @@ Highlite is a web application that aims to assist those who have trouble reading
 * Corey Sarkis, Github: "csarkis7"
 * Alden Burgess, Github: "aldenburgess"
 
+#User Interface
+* Login Page:
+  A place for users to login or sign up, and a place for user to drop thier files.
+* Read page
+  Displays the text of the dropped files, allows users to adjust setting of the
+  text display such as font spacing, word spacing, line spacing and fontsize.
+  In addtion users can choose font type and the colors of the text and background.
+  Users can also choose a highlight color and how they want the text iterated by highliter.  
+  Option include by word, sentance and paragraph.
+
+# API
+* /logout
+  sends a request to the server to end the current users session
+* /login
+  sends a username to the server to be crossreferenced
+  with the database then ties that username to a session
+  so that the page can be customised to them
+* /read/settingSave
+  send a JSON of user settings to the server, if the user has a
+  session running then there those settings will be stored in the
+  database using there users username, else a signal will be sent down
+  letting the user know they can only save when logged in
+* /read/settingGet
+  get setting is called automatically when a user goes to the read page
+  is they have a session running, the server will grab them the settings
+  associated with their username and send them down to be applyed
+* /getSession
+  return session information if a session is running
+* /filedrop
+  sends up a file to be parsed and reformated in the way it can be highlighted
+* /read/getJSON
+  asks for the parsed version of that file
+* /signup
+  send up a username to crossreferenced with the database, if the username
+  doesnt already exist a new account will be created for them. a signal will
+  be sent down to notify them they cannot use that username
+
+# URL Routes/Mappings
+
+![example image](api2.png)
+
+
 # Database:
 The Database has four functions:
 * Put: which takes in X some JSON string and creates a new JSON object in the Database.
