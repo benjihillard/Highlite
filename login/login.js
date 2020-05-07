@@ -1,4 +1,4 @@
-let url = 'http://localhost:' + process.env.PORT + '/';
+let url = 'https://highlite2.herokuapp.com/';
 isloggedIn();
 //sidebar-----------------------------------------------------------------------
 $("#menu-toggle").click(function(e) {
