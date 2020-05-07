@@ -171,7 +171,7 @@ $("#menu-toggle").click(function(e) {
 //-----------------------------------------------------------------------------------------------------
 // retrive user settings from the database-------------------------------------------------------------
 function getSettings() {
-  let route = "read/settingGet";
+  let route = "settingGet";
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url + route, true);
   xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
@@ -188,7 +188,7 @@ function getSettings() {
 //-------------------------------------------------------------------------------------------
 // store user settings in the database ------------------------------------------------------
 function storeSettings() {
-  let route = "read/settingSave";
+  let route = "settingSave";
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url + route, true);
   xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
@@ -209,7 +209,7 @@ function storeSettings() {
 // store user settings in the database ------------------------------------------------------
 async function getJSON(option) {
 
-  let route = "read/getJSON";
+  let route = "getJSON";
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url + route, true);
   xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
