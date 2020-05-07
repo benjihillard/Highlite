@@ -83,7 +83,6 @@ var MyServer = /** @class */ (function () {
                         case 0: return [4 /*yield*/, fs.readFileSync(__dirname + '/uploads/span.json', 'utf8')];
                         case 1:
                             obj = _a.sent();
-                            console.log(JSON.parse(obj));
                             if (obj !== null || obj !== undefined) {
                                 res.send(JSON.parse(obj));
                             }

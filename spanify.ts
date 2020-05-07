@@ -11,17 +11,22 @@ export class spanify {
 
   public async spanify(filePath){
     let dataBuffer = await fs.readFileSync(filePath);
+
     //------------------------------- parse sentance --------------------------------------------------------------
     await pdf(dataBuffer).then(function(data) {
       var parser = new Parser();
+      console.log(dataBuffer);
+      console.log(data);
+
+
       var text = data.text;
       var sentanceCount = 0;
       parser.addRule(/["’]?[A-Z][^.?!]+((?![.?!][’"]?\s["’]?[A-Z][^.?!]).)+[.?!’"]+/ig, function(tag) {
         sentanceCount++;
         return "<span class=" + '"' + "sentance" + sentanceCount.toString() + '"' + ">" + tag.substr(0) + "</span> ";
       });
-      parser.addRule(/(\r\n|\r|\n)+/ig, function(tag) {
-        return tag.substr(0) + "<br>";
+      parser.addRule(/(\n\s)/ig, function(tag) {
+        return "<br>" ;
       });
       spannedText.sentance = parser.render(text);
     }).catch(function(erro){
@@ -38,9 +43,10 @@ await pdf(dataBuffer).then(function(data) {
     wordCount++;
     return "<span class=" + '"' + "word" + wordCount.toString() + '"' + ">" + tag.substr(0) + "</span> ";
   });
-  parser.addRule(/(^M)+/ig, function(tag) {
-    return tag.substr(0) + "<br>";
+  parser.addRule(/(\n\s)/ig, function(tag) {
+    return "<br>" ;
   });
+
   spannedText.word = parser.render(text);
 }).catch(function(erro){
             console.log("Pdf error: ",erro);
@@ -52,12 +58,12 @@ await pdf(dataBuffer).then(function(data) {
   var parser = new Parser();
   var text = data.text;
   var paragraphCount = 1;
-
-  parser.addRule(/(\r\n|\r|\n)+/ig, function(tag) {
+  parser.addRule(/(\n\s)/ig, function(tag) {
     paragraphCount++;
-    return tag.substr(0) + "</span><br><span class=" + '"paragraph' + paragraphCount.toString() + '">';
+    return "</span> " + "<br>" + "<span class=" + '"' + "paragraph" + paragraphCount.toString() + '"' + ">" + tag.substr(0);
   });
-  spannedText.paragraph = "<span class=" + '"paragraph1' + '">' + parser.render(text) + "</span>";
+
+  spannedText.paragraph = "<span class=" + '"' + "paragraph1" +  '"' + ">" + parser.render(text) + "</span>";
 }).catch(function(erro){
             console.log("Pdf error: ",erro);
             return null;
