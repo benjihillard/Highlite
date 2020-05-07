@@ -1,4 +1,5 @@
 let url = window.location.href + '/';
+console.log(url);
 isloggedIn();
 //sidebar-----------------------------------------------------------------------
 $("#menu-toggle").click(function(e) {
