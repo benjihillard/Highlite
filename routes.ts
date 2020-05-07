@@ -48,7 +48,6 @@ export class MyServer {
 
         this.router.post('/read/getJSON', async function(req, res){
           let obj = await fs.readFileSync(__dirname + '/uploads/span.json', 'utf8');
-          console.log(JSON.parse(obj));
 
           if(obj !== null || obj !== undefined){
             res.send(JSON.parse(obj));
