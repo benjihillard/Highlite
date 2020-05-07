@@ -89,5 +89,15 @@ Alden Burgess
 * Implemented settingsGet API for retrieving JSON from the server
 * Heroku Deployment
 
+Benji Hillard
+* built versions 1 and 3 of Spanify
+* updated read page client to dynmically adjust settings
+* built login page client.
+* add sessions to the server
+* add a handful of missing routes to the server
+  to include getJSON, getSessions,
+* add login cabability to the server
+* add store and update functionality to database
+
 # Conclusion:
 Overall, we found working on this project to be a decent experience. We all found the idea of the application we were creating to be interesting, so we were all motivated to put in the extra work required to make it polished and high quality. Probably the main difficulty we encountered was properly dividing the labor. Since everyone was supposed to contribute fairly equally to all aspects of the application, having a team member push their code and then pulling it to add to what they worked on is somewhat inconvenient and makes testing the code less straightforward. Through these struggles we learned a lot about collaborating through git. It was also necessary to learn the core web dev material; going into this project we knew relatively little about creating a website beyond HTML/CSS. When it comes to the design and implementation process, we definitely learned the value of refactoring existing code to improve consistency across multiple developers, and make sure that as we expand into new features our code doesn't devolve into an incomprehensible mess. As far as knowledge we wish we'd had before starting this project, we can all agree that having databases experience, even outside the realm of web development, would have made our lives significantly easier.

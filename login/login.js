@@ -1,4 +1,4 @@
-let url = 'http://localhost:8080/'
+let url = 'http://localhost:' + process.env.PORT + '/';
 isloggedIn();
 //sidebar-----------------------------------------------------------------------
 $("#menu-toggle").click(function(e) {
