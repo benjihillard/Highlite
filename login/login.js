@@ -1,4 +1,4 @@
-let url = 'https://highlite2.herokuapp.com/';
+let url = window.location.pathname + '/';
 isloggedIn();
 //sidebar-----------------------------------------------------------------------
 $("#menu-toggle").click(function(e) {
