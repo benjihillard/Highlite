@@ -1,4 +1,4 @@
-let url = window.location.href + '/';
+let url = window.location.href;
 console.log(url);
 isloggedIn();
 //sidebar-----------------------------------------------------------------------
