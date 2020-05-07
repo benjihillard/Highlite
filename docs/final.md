@@ -78,5 +78,16 @@ Corey Sarkis
 * Properly set and stored parsed strings into a JSON object
 * Tried to help with working on some of the background code
 
+Alden Burgess
+* Visual design
+* Worked on the HTML/CSS on read page
+* Implemented much of the read page javascript
+* Added the functionality of swapping between word, sentence and paragraph highlighting
+* Added the ability to change highlighted span
+* Integrated spanify with read page
+* Added database functionality for login, signup and default settings
+* Implemented settingsGet API for retrieving JSON from the server
+* Heroku Deployment
+
 # Conclusion:
-Our experience in working on this project was for the most part, decent one. We all found the idea of the application we were creating to be interesting. This caused us to put in a bit of extra work as we wanted to see the end product be something we enjoyed. Probably the main difficulty we encountered was properly dividing the labor. Since everyone was supposed to contribute fairly equally to all aspects of the application, having a team member push their code and then pulling it to add to what they worked on is somewhat inconvenient and makes testing the code less straightforward.
+Overall, we found working on this project to be a decent experience. We all found the idea of the application we were creating to be interesting, so we were all motivated to put in the extra work required to make it polished and high quality. Probably the main difficulty we encountered was properly dividing the labor. Since everyone was supposed to contribute fairly equally to all aspects of the application, having a team member push their code and then pulling it to add to what they worked on is somewhat inconvenient and makes testing the code less straightforward. Through these struggles we learned a lot about collaborating through git. It was also necessary to learn the core web dev material; going into this project we knew relatively little about creating a website beyond HTML/CSS. When it comes to the design and implementation process, we definitely learned the value of refactoring existing code to improve consistency across multiple developers, and make sure that as we expand into new features our code doesn't devolve into an incomprehensible mess. As far as knowledge we wish we'd had before starting this project, we can all agree that having databases experience, even outside the realm of web development, would have made our lives significantly easier.
