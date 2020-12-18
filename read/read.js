@@ -93,14 +93,29 @@ function set(setting) {
     changeLineSpacing();
 
 }
+
+//highlighting options radio button click detectors
+$("#option1").click(function(e) {
+  //e.preventDefault();
+  getJSON(1);
+  currentSpan = 0;
+});
+$("#option2").click(function(e) {
+  //e.preventDefault();
+  getJSON(2);
+  currentSpan = 0;
+});
+$("#option3").click(function(e) {
+  //e.preventDefault();
+  getJSON(3);
+  currentSpan = 0;
+});
 //-------------------------------------------------------------------------------------------
 
 //span cycling-----------------------------------------------------------------------------
-console.log(window.value);
 document.getElementById("option1").checked = true;
 let currentSpan=0;
-getJSON(1);
-document.getElementsByClassName('word'+ currentSpan)[0].style.backgroundColor=highlightColor.value;
+
 document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
     return;
@@ -138,22 +153,7 @@ document.addEventListener('keyup', function (e) {
   }
 });
 
-//highlighting options radio button click detectors
-$("#option1").click(function(e) {
-  //e.preventDefault();
-  getJSON(1);
-  currentSpan = 0;
-});
-$("#option2").click(function(e) {
-  //e.preventDefault();
-  getJSON(2);
-  currentSpan = 0;
-});
-$("#option3").click(function(e) {
-  //e.preventDefault();
-  getJSON(3);
-  currentSpan = 0;
-});
+
 
 //------------------------------------------------------------------------------------------------------
 
