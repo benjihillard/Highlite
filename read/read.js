@@ -99,6 +99,7 @@ $("#option1").click(function(e) {
   //e.preventDefault();
   getJSON(1);
   currentSpan = 0;
+  document.getElementsByClassName('word'+ currentSpan)[0].style.backgroundColor=highlightColor.value;
 });
 $("#option2").click(function(e) {
   //e.preventDefault();
@@ -115,7 +116,6 @@ $("#option3").click(function(e) {
 //span cycling-----------------------------------------------------------------------------
 document.getElementById("option1").checked = true;
 let currentSpan=0;
-
 document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
     return;
