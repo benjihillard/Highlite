@@ -115,6 +115,7 @@ $("#option3").click(function(e) {
 //span cycling-----------------------------------------------------------------------------
 document.getElementById("option1").checked = true;
 let currentSpan=0;
+getJSON(1);
 if(document.getElementById("option1").checked){
 
   for(let i=0; i<array.length; ++i){
