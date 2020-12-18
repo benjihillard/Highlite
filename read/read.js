@@ -99,6 +99,10 @@ function set(setting) {
 console.log(window.value);
 document.getElementById("option1").checked = true;
 let currentSpan=0;
+for(let i=0; i<array.length; ++i){
+  array[i].style.backgroundColor="transparent";
+}
+document.getElementsByClassName('word'+ currentSpan)[0].style.backgroundColor=highlightColor.value;
 document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
     return;
