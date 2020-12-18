@@ -98,7 +98,7 @@ function set(setting) {
 //span cycling-----------------------------------------------------------------------------
 console.log(window.value);
 
-let currentSpan=0;
+let currentSpan=1;
 getJSON(1);
 document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
