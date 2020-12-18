@@ -1,6 +1,7 @@
 let url = window.location.href;
 console.log(url);
-getJSON();
+getJSON(1);
+currentSpan = 0;
 let settings = getSettings()
 // declairng buttons
 let backgroundColor = document.getElementById('background');
@@ -141,8 +142,7 @@ document.addEventListener('keyup', function (e) {
 //highlighting options radio button click detectors
 $("#option1").click(function(e) {
   e.preventDefault();
-  getJSON(1);
-  currentSpan = 0;
+  
 });
 $("#option2").click(function(e) {
   e.preventDefault();
