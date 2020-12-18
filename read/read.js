@@ -115,26 +115,8 @@ $("#option3").click(function(e) {
 //span cycling-----------------------------------------------------------------------------
 document.getElementById("option1").checked = true;
 let currentSpan=0;
-getJSON(1);
-if(document.getElementById("option1").checked){
 
-  for(let i=0; i<array.length; ++i){
-    array[i].style.backgroundColor="transparent";
-  }
-  document.getElementsByClassName('word'+ currentSpan)[0].style.backgroundColor=highlightColor.value;
-}
-if(document.getElementById('option2').checked){
-  for(let i=0; i<array.length; ++i){
-    array[i].style.backgroundColor="transparent";
-  }
-  document.getElementsByClassName('sentance'+currentSpan)[0].style.backgroundColor=highlightColor.value;
-}
-if(document.getElementById('option3').checked){
-  for(let i=0; i<array.length; ++i){
-    array[i].style.backgroundColor="transparent";
-  }
-  document.getElementsByClassName('paragraph'+currentSpan)[0].style.backgroundColor=highlightColor.value;
-}
+
 document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
     return;
