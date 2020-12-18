@@ -1,5 +1,6 @@
 let url = window.location.href;
-
+getJSON(1);
+currentSpan = 1;
 let settings = getSettings()
 // declairng buttons
 let backgroundColor = document.getElementById('background');
