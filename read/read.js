@@ -238,3 +238,6 @@ async function getJSON(option) {
   xhr.send();
 }
 //------------------------------------------------------------------------------
+function home(){
+  window.location = "https://highlite1.herokuapp.com/"
+}
