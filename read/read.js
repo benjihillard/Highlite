@@ -1,6 +1,4 @@
 let url = window.location.href;
-getJSON(1);
-currentSpan = 1;
 let settings = getSettings()
 // declairng buttons
 let backgroundColor = document.getElementById('background');
@@ -101,6 +99,7 @@ function set(setting) {
 console.log(window.value);
 
 let currentSpan=0;
+getJSON(1);
 document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
     return;
