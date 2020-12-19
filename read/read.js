@@ -99,23 +99,23 @@ function set(setting) {
 $("#option1").click(function(e) {
   //e.preventDefault();
   getJSON(1);
-  currentSpan = 0;
+  currentSpan = 1;
 });
 $("#option2").click(function(e) {
   //e.preventDefault();
   getJSON(2);
-  currentSpan = 0;
+  currentSpan = 1;
 });
 $("#option3").click(function(e) {
   //e.preventDefault();
   getJSON(3);
-  currentSpan = 0;
+  currentSpan = 1;
 });
 //-------------------------------------------------------------------------------------------
 
 //span cycling-----------------------------------------------------------------------------
 //document.getElementById("option1").checked = true;
-let currentSpan=0;
+let currentSpan=1;
 let array = document.getElementById("bodytext").children;
 document.getElementsByClassName('word'+currentSpan)[0].style.backgroundColor = highlightColor.value;
 document.addEventListener('keyup', function (e) {
