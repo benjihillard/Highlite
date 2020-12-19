@@ -226,7 +226,7 @@ async function getJSON(option) {
       } else if (option === 3) {
         text.innerHTML = JSON.parse(xhr.response).paragraph;
       } else {
-        text.innerHTML = JSON.parse(xhr.response).sentance;
+        text.innerHTML = JSON.parse(xhr.response).word;
       }
 
 
