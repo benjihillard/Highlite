@@ -117,7 +117,8 @@ $("#option3").click(function(e) {
 //document.getElementById("option1").checked = true;
 let currentSpan=1;
 let array = document.getElementById("bodytext").children;
-document.getElementsByClassName('word'+currentSpan.toString()).style.backgroundColor = highlightColor.value;
+console.log('word'+currentSpan.toString())
+document.getElementsByClassName('word'+currentSpan.toString())[0].style.backgroundColor = highlightColor.value;
 document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
     return;
