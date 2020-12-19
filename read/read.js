@@ -121,7 +121,7 @@ document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
     return;
   }
-  e.defaultPrevented
+  e.preventDefault();
   var key = e.keyCode;
   let array = document.getElementById("bodytext").children;
   if(key === 37){//keycode for left arrow
