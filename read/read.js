@@ -114,10 +114,10 @@ $("#option3").click(function(e) {
 //-------------------------------------------------------------------------------------------
 
 //span cycling-----------------------------------------------------------------------------
-document.getElementById("option1").checked = true;
+document.getElementById("option2").checked = true;
 let currentSpan=0;
 let array = document.getElementById("bodytext").children;
-
+document.getElementsByClassName('sentance'+currentSpan)[0].style.backgroundColor=highlightColor.value;
 document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
     return;
