@@ -232,9 +232,9 @@ var MyServer = /** @class */ (function () {
                             if (!(session === undefined)) return [3 /*break*/, 1];
                             setting = {
                                 'fontFamily': '"Roboto Slab", serif',
-                                'highlightColor': '#008000',
+                                'highlightColor': '##f5e256',
                                 'backgroundColor': '#c0c0c0',
-                                'fontColor': '#ff8040',
+                                'fontColor': '#242222',
                                 'fontSize': '34',
                                 'letterSpacing': '4',
                                 'wordSpacing': '7',
