@@ -128,7 +128,7 @@ export class MyServer {
               'highlightColor': '#11b7ee',
               'backgroundColor' : '#ebdecb',
               'fontColor' : '#000000',
-              'fontSize' : '22',
+              'fontSize' : '20',
               'letterSpacing' : '2',
               'wordSpacing' : '5',
               'lineHeight' : '45'
