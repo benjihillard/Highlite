@@ -230,8 +230,6 @@ async function getJSON(option) {
       }
 
 
-      console.log(JSON.parse(xhr.response).word);
-
 
     }else if (xhr.readyState == 4 && xhr.status == 400) {
       alert('Sorry this is a logged in feature only. Loggin or Sign Up if you want to save.');
