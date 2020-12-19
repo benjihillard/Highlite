@@ -117,10 +117,6 @@ $("#option3").click(function(e) {
 //document.getElementById("option1").checked = true;
 let currentSpan=1;
 let array = document.getElementById("bodytext").children;
-console.log('word'+currentSpan.toString());
-let first = document.getElementsByClassName('word'+currentSpan.toString())[0];
-console.log(first);
-first.style.backgroundColor = highlightColor.value;
 document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
     return;
@@ -231,6 +227,10 @@ async function getJSON(option) {
       } else {
         text.innerHTML = JSON.parse(xhr.response).word;
       }
+      console.log('word'+currentSpan.toString());
+      let first = document.getElementsByClassName('word'+currentSpan.toString())[0];
+      console.log(first);
+      first.style.backgroundColor = highlightColor.value;
 
 
 
