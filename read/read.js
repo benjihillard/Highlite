@@ -1,6 +1,6 @@
 let url = window.location.href;
 let settings = getSettings()
-getJSON();
+getJSON(1);
 // declairng buttons
 let backgroundColor = document.getElementById('background');
 let fontColor = document.getElementById('text');
@@ -114,10 +114,10 @@ $("#option3").click(function(e) {
 //-------------------------------------------------------------------------------------------
 
 //span cycling-----------------------------------------------------------------------------
-document.getElementById("option2").checked = true;
+document.getElementById("option1").checked = true;
 let currentSpan=0;
 let array = document.getElementById("bodytext").children;
-document.getElementsByClassName('sentance'+currentSpan)[0].style.backgroundColor=highlightColor.value;
+document.getElementsByClassName('word'+currentSpan)[0].style.backgroundColor = highlightColor.value;
 document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
     return;
