@@ -217,18 +217,22 @@ async function getJSON(option) {
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhr.addEventListener("readystatechange", await function(e) {
     if (xhr.readyState == 4 && xhr.status == 200) {
-
+      
+      let wordtype = 'word'
       if (option === 1) {
         text.innerHTML = JSON.parse(xhr.response).word;
+        wordtype = 'word'
       } else if (option === 2) {
         text.innerHTML = JSON.parse(xhr.response).sentance;
+        wordtype = 'sentance'
       } else if (option === 3) {
         text.innerHTML = JSON.parse(xhr.response).paragraph;
+        wordtype = 'paragraph'
       } else {
         text.innerHTML = JSON.parse(xhr.response).word;
       }
-      console.log('word'+currentSpan.toString());
-      let first = document.getElementsByClassName('word'+currentSpan.toString())[0];
+      console.log(wordtype+currentSpan.toString());
+      let first = document.getElementsByClassName(wordtype+currentSpan.toString())[0];
       console.log(first);
       first.style.backgroundColor = highlightColor.value;
 
