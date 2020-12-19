@@ -97,24 +97,24 @@ function set(setting) {
 
 //highlighting options radio button click detectors
 $("#option1").click(function(e) {
-  e.preventDefault();
+  //e.preventDefault();
   getJSON(1);
   currentSpan = 0;
 });
 $("#option2").click(function(e) {
-  e.preventDefault();
+  //e.preventDefault();
   getJSON(2);
   currentSpan = 0;
 });
 $("#option3").click(function(e) {
-  e.preventDefault();
+  //e.preventDefault();
   getJSON(3);
   currentSpan = 0;
 });
 //-------------------------------------------------------------------------------------------
 
 //span cycling-----------------------------------------------------------------------------
-document.getElementById("option1").checked = true;
+//document.getElementById("option1").checked = true;
 let currentSpan=0;
 let array = document.getElementById("bodytext").children;
 document.getElementsByClassName('word'+currentSpan)[0].style.backgroundColor = highlightColor.value;
