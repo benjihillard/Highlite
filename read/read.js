@@ -230,7 +230,7 @@ async function getJSON(option) {
       }
 
 
-      console.log(JSON.parse(xhr.response));
+      console.log(JSON.parse(xhr.response).word);
 
 
     }else if (xhr.readyState == 4 && xhr.status == 400) {
