@@ -97,19 +97,19 @@ function set(setting) {
 
 //highlighting options radio button click detectors
 $("#option1").click(function(e) {
-  //e.preventDefault();
+  e.preventDefault();
   getJSON(1);
   currentSpan = 1;
 });
 $("#option2").click(function(e) {
-  //e.preventDefault();
+  e.preventDefault();
   getJSON(2);
   currentSpan = 1;
 });
 $("#option3").click(function(e) {
-  //e.preventDefault();
+  e.preventDefault();
   getJSON(3);
-  currentSpan = 1;
+  currentSpan = 2;
 });
 //-------------------------------------------------------------------------------------------
 
@@ -121,6 +121,7 @@ document.addEventListener('keyup', function (e) {
   if(e.defaultPrevented){
     return;
   }
+  e.defaultPrevented
   var key = e.keyCode;
   let array = document.getElementById("bodytext").children;
   if(key === 37){//keycode for left arrow
