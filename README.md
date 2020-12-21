@@ -4,6 +4,8 @@ Highlite is a minimalist web application that aims to assist those who have trou
 
 [![](/highlite.gif)](https://www.youtube.com/watch?v=T1k09MU7RYs&feature=youtu.be)
 
+[Try the live demo here.](https://highlite1.herokuapp.com/)
+
 ### Backlog
 
 - Timer based toggling
